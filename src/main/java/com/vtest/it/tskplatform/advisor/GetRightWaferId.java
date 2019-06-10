@@ -1,13 +1,11 @@
 package com.vtest.it.tskplatform.advisor;
 
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.core.Ordered;
-import org.springframework.stereotype.Component;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class GetRightWaferId implements Ordered {
     @Override
     public int getOrder() {

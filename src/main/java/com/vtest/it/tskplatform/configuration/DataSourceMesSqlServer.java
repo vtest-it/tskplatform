@@ -18,7 +18,7 @@ import java.sql.SQLException;
 @Configuration
 @MapperScan(value = "com.vtest.it.tskplatform.dao.mes",sqlSessionTemplateRef = "mesSqlSessionTemplate")
 public class DataSourceMesSqlServer {
-    @Bean(initMethod = "init",destroyMethod = "close")
+    @Bean(value = "mesDataSource",initMethod = "init",destroyMethod = "close")
     @ConfigurationProperties(prefix = "spring.datasource.druid.mes")
     public DruidDataSource mesDataSource(){
         DruidDataSource dataSource=new DruidDataSource();
@@ -29,7 +29,7 @@ public class DataSourceMesSqlServer {
         }
         return dataSource;
     }
-    @Bean
+    @Bean("mesSqlsessionFactory")
     public SqlSessionFactory mesSqlsessionFactory(@Qualifier("mesDataSource") DataSource dataSource)throws Exception{
         SqlSessionFactoryBean sqlSessionFactoryBean=new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
@@ -37,12 +37,12 @@ public class DataSourceMesSqlServer {
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mappers/mes/*.xml"));
         return  sqlSessionFactoryBean.getObject();
     }
-    @Bean
+    @Bean("mesSqlSessionTemplate")
     public SqlSessionTemplate mesSqlSessionTemplate(@Qualifier("mesSqlsessionFactory") SqlSessionFactory sqlSessionFactory){
         SqlSessionTemplate sqlSessionTemplate=new SqlSessionTemplate(sqlSessionFactory);
         return sqlSessionTemplate;
     }
-    @Bean
+    @Bean("mesDataSourceTransactionManager")
     public DataSourceTransactionManager mesDataSourceTransactionManager(@Qualifier("mesDataSource") DruidDataSource mesDataSource){
         return  new DataSourceTransactionManager(mesDataSource);
     }

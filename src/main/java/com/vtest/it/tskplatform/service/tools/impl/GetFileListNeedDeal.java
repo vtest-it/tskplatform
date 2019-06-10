@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 @Service
 public class GetFileListNeedDeal {
-    public ArrayList<File> getList(File dataSource,int seconds){
+    public ArrayList<File> getList(ArrayList<File> fileNeedDealList,int seconds){
         ArrayList<File> fileNeedCheckList=new ArrayList<>();
-        for (File lot : dataSource.listFiles()) {
+        for (File lot : fileNeedDealList) {
             if (((System.currentTimeMillis()-lot.lastModified())/(1000))>seconds){
                 fileNeedCheckList.add(lot);
             }

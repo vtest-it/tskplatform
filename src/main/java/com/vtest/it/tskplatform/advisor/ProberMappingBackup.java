@@ -1,12 +1,13 @@
 package com.vtest.it.tskplatform.advisor;
 
+import com.vtest.it.tskplatform.MappingParseTools.TskProberMappingParseCpAndWaferId;
 import com.vtest.it.tskplatform.pojo.mes.CustomerCodeAndDeviceBean;
 import com.vtest.it.tskplatform.service.mes.GetMesInfor;
 import com.vtest.it.tskplatform.service.tools.impl.GetFileListNeedDeal;
 import org.apache.commons.io.FileUtils;
-import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Aspect
 @Component
@@ -29,14 +32,26 @@ public class ProberMappingBackup implements Ordered {
     private GetMesInfor getMesInfor;
     @Autowired
     private GetFileListNeedDeal getFileListNeedDeal;
-
-    @Before("target(com.vtest.it.tskplatform.datadeal.TskPlatformDataDeal)&& args(dataSource)")
-    public void backupProberMapping(File dataSource) {
-        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList(dataSource, 60);
+    @Autowired
+    private TskProberMappingParseCpAndWaferId tskProberMappingParseCpAndWaferId;
+    @Around("target(com.vtest.it.tskplatform.datadeal.TskPlatformDataDeal)&&execution(* deal(..))")
+    public void backupProberMapping(ProceedingJoinPoint proceedingJoinPoint) {
+        String regex="[0-9]{1,}";
+        Pattern pattern=Pattern.compile(regex);
+        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList((ArrayList<File>) (proceedingJoinPoint.getArgs()[0]), 30);
+        ArrayList<File> fileNeedDealList = new ArrayList<>();
         for (File file : fileNeedCheckList) {
             if (file.isFile()) {
                 try {
-                    FileUtils.copyDirectory(file, new File(errorPath));
+                    FileUtils.copyFile(file, new File(errorPath + "/" + file.getName()));
+                    FileUtils.forceDelete(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                continue;
+            }
+            if (file.listFiles().length == 0) {
+                try {
                     FileUtils.forceDelete(file);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -46,8 +61,33 @@ public class ProberMappingBackup implements Ordered {
             String lot = file.getName();
             CustomerCodeAndDeviceBean customerCodeAndDeviceBean = getMesInfor.getCustomerAndDeviceByLot(lot);
             if (null != customerCodeAndDeviceBean.getCustomerCode()) {
+                for (File wafer : file.listFiles()) {
+                    try {
+                        String waferIdSurface=wafer.getName().substring(4);
+                        String result = tskProberMappingParseCpAndWaferId.parse(wafer);
+                        String waferFromFile=result.split(":")[0];
+                        String cpProcess=result.split(":")[1];
+                        Matcher matcher=pattern.matcher(cpProcess.substring(2));
+                        if ((!waferIdSurface.trim().equals(waferFromFile.trim()))||!matcher.find()){
+                            FileUtils.copyFile(wafer,new File(errorPath+"/waferCheckError/"+lot+"/"+wafer.getName()));
+                            FileUtils.forceDelete(wafer);
+                        }
+                    } catch (IOException e) {
+                        try {
+                            FileUtils.copyFile(wafer,new File(errorPath+"/waferCheckError/"+lot+"/"+wafer.getName()));
+                            FileUtils.forceDelete(wafer);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
                 try {
-                    FileUtils.copyDirectory(file, new File(mapDownPath + "/" + file.getName()));
+                    if (file.listFiles().length>0){
+                        fileNeedDealList.add(file);
+                        FileUtils.copyDirectory(file, new File(mapDownPath + "/" + file.getName()));
+                    }else {
+                        FileUtils.forceDelete(file);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -61,11 +101,22 @@ public class ProberMappingBackup implements Ordered {
                 }
             }
         }
+        try {
+            ArrayList<File> fileBeDealList = (ArrayList<File>) proceedingJoinPoint.proceed(new Object[]{fileNeedDealList});
+            backupProberMappingAfterDeal(fileBeDealList);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
-    @AfterReturning("execution(* deal(..))&&args(dataSource)")
-    public void backupProberMappingAfterDeal(File dataSource) {
-
+    public void backupProberMappingAfterDeal(ArrayList<File> fileBeDealList) {
+        for (File file : fileBeDealList) {
+            try {
+                FileUtils.forceDelete(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

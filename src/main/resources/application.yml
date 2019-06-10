@@ -6,6 +6,7 @@ system:
       backup-path: /server212/prod/BackupMap/
       rawdata-path: /server212/RawData/ProberRawdata/
       error-path: /server212/SeriousEorrMapping/
+      temp-rawdata: /TempRawdata/
 spring:
   application:
     name: tsk-data-deal-platform
@@ -34,6 +35,22 @@ spring:
         enabled: true
       vtptmt:
         url: jdbc:mysql://192.168.10.231:3306/VTPTMT?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: VtestAdmin!234
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        test-on-return: false
+        test-while-idle: true
+        test-on-borrow: false
+        max-wait: 60000
+        min-idle: 2
+        max-active: 30
+        initial-size: 1
+        pool-prepared-statements: true
+        max-open-prepared-statements: 20
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 30000
+      prober:
+        url: jdbc:mysql://192.168.10.231:3306/vtdaprober?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
         username: root
         password: VtestAdmin!234
         driver-class-name: com.mysql.cj.jdbc.Driver
