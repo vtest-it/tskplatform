@@ -1,0 +1,26 @@
+DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
+DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} created
+DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20004} executed. 39.709186 millis. {call WebMES.dbo.pro_getWaferid(?,?)}
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50004} open
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50004} Header: [WaferID]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50004} Result: [S1M062-19]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50004} closed
+DEBUG scheduling-1 druid.sql.Statement - {conn-10001, pstmt-20004} clearParameters. 
+DEBUG scheduling-1 druid.sql.Connection - {conn-10001} pool-recycle
+DEBUG scheduling-1 druid.sql.Connection - {conn-10001} pool-connect
+DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20004} Parameters : [S1M062, 20]
+DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20004} Types : [VARCHAR, VARCHAR]
+DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000, rs-150000} query executed. 45.378454 millis. /* ping */ SELECT 1
+DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} open
+DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Header: [1]
+DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Result: [1]
+DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} closed
+DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} closed
+DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
+DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20004} executed. 61.02877 millis. {call WebMES.dbo.pro_getWaferid(?,?)}
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50005} open
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50005} Header: [WaferID]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50005} Result: [S1M062-20]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50005} closed
+DEBUG scheduling-1 druid.sql.Statement - {conn-10001, pstmt-20004} clearParameters. 
+DEBUG scheduling-1 druid.sql.Connection - {conn-10001} pool-recycle

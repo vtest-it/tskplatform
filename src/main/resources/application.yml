@@ -1,0 +1,81 @@
+system:
+ properties:
+  tsk:
+      mapup: /server212/prod/prober/TSK/mapup/
+      mapdown: /server212/prod/prober/TSK/mapdown/
+      backup-path: /server212/prod/BackupMap/
+      rawdata-path: /server212/RawData/ProberRawdata/
+      error-path: /server212/SeriousEorrMapping/
+spring:
+  application:
+    name: tsk-data-deal-platform
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 192.168.10.234:26379,192.168.10.234:26380,192.168.10.234:26381
+    password: VtestAdmin!234
+    lettuce:
+      pool:
+        max-wait: -1
+        max-active: 16
+        max-idle: 8
+        min-idle: 0
+  datasource:
+    druid:
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin123#
+        url-pattern: /druid/*
+        allow: 192.168.8.85
+      web-stat-filter:
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico
+        url-pattern: /*
+        enabled: true
+      vtptmt:
+        url: jdbc:mysql://192.168.10.231:3306/VTPTMT?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: VtestAdmin!234
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        test-on-return: false
+        test-while-idle: true
+        test-on-borrow: false
+        max-wait: 60000
+        min-idle: 2
+        max-active: 30
+        initial-size: 1
+        pool-prepared-statements: true
+        max-open-prepared-statements: 20
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 30000
+      mes:
+        url: jdbc:sqlserver://VTSQLDB01;database=WebMES
+        username: EDATESTER
+        password: VTest888!
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        test-on-return: false
+        test-while-idle: true
+        test-on-borrow: false
+        max-wait: 60000
+        min-idle: 2
+        max-active: 40
+        initial-size: 1
+        pool-prepared-statements: true
+        max-open-prepared-statements: 30
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 30000
+server:
+  port: 10010
+#信息
+info:
+  name: shawn
+  server:
+    port: ${server.port}
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: ["*"]

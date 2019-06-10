@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vtest.it.tskplatform.dao.mes.MesDao">
+    <resultMap id="customerAndDevice" type="com.vtest.it.tskplatform.pojo.mes.CustomerCodeAndDeviceBean">
+        <result property="customerCode" column="CustCode"/>
+        <result property="device" column="CustPart"/>
+        <result property="lot" column="Lot"/>
+    </resultMap>
+    <select id="getWaferIdBySlot" resultType="string" statementType="CALLABLE">
+       {call WebMES.dbo.pro_getWaferid(#{lot,mode=IN,jdbcType=VARCHAR},#{slot,mode=IN,jdbcType=VARCHAR})}
+    </select>
+    <select id="getLotSlotConfig" statementType="CALLABLE" resultType="com.vtest.it.tskplatform.pojo.mes.SlotAndSequenceConfigBean">
+        {call WebMES.dbo.pro_getSlotAndSequence(#{lot,mode=IN,jdbcType=VARCHAR})}
+    </select>
+    <select id="getWaferConfigFromMes" statementType="CALLABLE" resultType="com.vtest.it.tskplatform.pojo.mes.MesConfigBean">
+        {call WebMES.dbo.pro_GetWaferInfo(#{waferId,mode=IN,jdbcType=VARCHAR},#{cpProcess,mode=IN,jdbcType=VARCHAR})}
+    </select>
+    <select id="getCustomerAndDeviceByLot" statementType="CALLABLE" resultMap="customerAndDevice">
+        {call WebMES.dbo.pro_GetLotDeviceInfo(#{lot,mode=IN,jdbcType=VARCHAR})}
+    </select>
+</mapper>
