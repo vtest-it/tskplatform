@@ -1,79 +1,115 @@
 package com.vtest.it.tskplatform.datadeal;
 
-import com.vtest.it.tskplatform.MappingParseTools.TskProberMappingParse;
-import com.vtest.it.tskplatform.MappingParseTools.TskProberMappingParseCpAndWaferId;
-import com.vtest.it.tskplatform.pojo.mes.MesConfigBean;
 import com.vtest.it.tskplatform.pojo.mes.SlotAndSequenceConfigBean;
 import com.vtest.it.tskplatform.pojo.rawdataBean.RawdataInitBean;
+import com.vtest.it.tskplatform.pojo.vtptmt.DataParseIssueBean;
 import com.vtest.it.tskplatform.service.mes.impl.GetMesInforImpl;
+import com.vtest.it.tskplatform.service.tools.impl.DiffUtil;
 import com.vtest.it.tskplatform.service.tools.impl.GenerateRawdata;
-import com.vtest.it.tskplatform.service.tools.impl.GetFileListNeedDeal;
-import com.vtest.it.tskplatform.service.tools.impl.InitMesConfigToRawdataProperties;
+import com.vtest.it.tskplatform.service.tools.impl.rawdataCheck.RawDataCheck;
+import com.vtest.it.tskplatform.service.vtptmt.impl.VtptmtInforImpl;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Service
 public class TskPlatformDataDeal {
-    @Autowired
-    private GetFileListNeedDeal getFileListNeedDeal;
-    @Autowired
-    private TskProberMappingParse tskProberMappingParse;
+    @Value("${system.properties.tsk.rawdata-path}")
+    private String rawdataPath;
     @Autowired
     private GetMesInforImpl getMesInfor;
     @Autowired
-    private TskProberMappingParseCpAndWaferId tskProberMappingParseCpAndWaferId;
-    @Autowired
-    private InitMesConfigToRawdataProperties initMesConfigToRawdataProperties;
-    @Autowired
     private GenerateRawdata generateRawdata;
+    @Autowired
+    private RawDataCheck rawDataCheck;
+    @Autowired
+    private VtptmtInforImpl vtptmtInfor;
+    @Autowired
+    private GenerateRawdataInitInformation generateRawdataInitInformation;
     public ArrayList<File> deal(ArrayList<File> fileNeedDealList) {
         ArrayList<File> filesBeDealedList = new ArrayList<>();
         for (File lot : fileNeedDealList) {
-            SlotAndSequenceConfigBean slotAndSequenceConfigBean = getMesInfor.getLotSlotConfig(lot.getName());
-            if (slotAndSequenceConfigBean.getReadType().equals("SLOT")) {
-                File[] waferIds = lot.listFiles();
-                if (waferIds.length > 0) {
-                    for (File wafer : waferIds) {
-                        try {
-                            Integer slot = Integer.valueOf(wafer.getName().substring(0, 3));
-                            String waferId = getMesInfor.getWaferIdBySlot(lot.getName(), "" + slot);
-                            RawdataInitBean rawdataInitBean = new RawdataInitBean();
-                            String cpProcess = tskProberMappingParseCpAndWaferId.parse(wafer).split(":")[1];
-                            MesConfigBean mesConfigBean = getMesInfor.getWaferConfigFromMes(waferId, cpProcess);
-                            tskProberMappingParse.parse(wafer, Integer.valueOf(slotAndSequenceConfigBean.getGpibBin()), rawdataInitBean);
-                            initMesConfigToRawdataProperties.initMesConfig(rawdataInitBean, mesConfigBean);
-                            generateRawdata.generate(rawdataInitBean);
-                            filesBeDealedList.add(wafer);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+            try {
+                SlotAndSequenceConfigBean slotAndSequenceConfigBean = getMesInfor.getLotSlotConfig(lot.getName());
+                if (slotAndSequenceConfigBean.getReadType().equals("SLOT")) {
+                    File[] waferIds = lot.listFiles();
+                    if (waferIds.length > 0) {
+                        for (File wafer : waferIds) {
+                            try {
+                                ArrayList<DataParseIssueBean> dataParseIssueBeans = new ArrayList<DataParseIssueBean>();
+                                Integer slot = Integer.valueOf(wafer.getName().substring(0, 3));
+                                String waferId = getMesInfor.getWaferIdBySlot(lot.getName(), "" + slot);
+                                generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lot.getName(), dataParseIssueBeans, filesBeDealedList);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                } else {
+                    File[] waferIds = lot.listFiles();
+                    if (waferIds.length > 0) {
+                        for (File wafer : waferIds) {
+                            try {
+                                ArrayList<DataParseIssueBean> dataParseIssueBeans = new ArrayList<>();
+                                String waferId = wafer.getName().substring(4);
+                                generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lot.getName(), dataParseIssueBeans, filesBeDealedList);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
-            } else {
-                File[] waferIds = lot.listFiles();
-                if (waferIds.length > 0) {
-                    for (File wafer : waferIds) {
-                        try {
-                            String waferId = wafer.getName().substring(4, wafer.getName().length());
-                            RawdataInitBean rawdataInitBean = new RawdataInitBean();
-                            tskProberMappingParse.parse(wafer, 0, rawdataInitBean);
-                            rawdataInitBean.getDataProperties().put("Wafer ID", waferId);
-                            filesBeDealedList.add(wafer);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
+        return filesBeDealedList;
+    }
+
+    public void generateRawdata(File wafer, SlotAndSequenceConfigBean slotAndSequenceConfigBean, String waferId, String lot, ArrayList<DataParseIssueBean> dataParseIssueBeans, ArrayList<File> filesBeDealedList) throws Exception {
+        RawdataInitBean rawdataInitBean = generateRawdataInitInformation.generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lot);
+        if (generateTempRawdata(rawdataInitBean, dataParseIssueBeans)) {
+            vtptmtInfor.dataErrorsRecord(dataParseIssueBeans);
+            filesBeDealedList.add(wafer);
+        }
+    }
+
+    public boolean generateTempRawdata(RawdataInitBean rawdataInitBean, ArrayList<DataParseIssueBean> dataParseIssueBeans) throws Exception {
+        File tempRawdata = generateRawdata.generate(rawdataInitBean);
+        boolean checkFlag = rawDataCheck.check(tempRawdata, dataParseIssueBeans);
+        if (!checkFlag) {
+            return false;
+        }
+        generateFinalRawdata(tempRawdata, rawdataInitBean);
+        return true;
+    }
+
+    private void generateFinalRawdata(File file, RawdataInitBean rawdataInitBean) {
+        String customerCode = rawdataInitBean.getProperties().get("Customer Code");
+        String device = rawdataInitBean.getProperties().get("Device Name");
+        String lot = rawdataInitBean.getProperties().get("Lot ID");
+        String cpProcess = rawdataInitBean.getProperties().get("CP Process");
+        String waferId = rawdataInitBean.getProperties().get("Wafer ID");
+        File destFile = new File(rawdataPath + "/" + customerCode + "/" + device + "/" + lot + "/" + cpProcess + "/" + waferId + ".raw");
         try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
+            FileUtils.copyFile(file, destFile);
+            if (!DiffUtil.check(file, destFile)) {
+                try {
+                    FileUtils.forceDelete(destFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                generateFinalRawdata(file, rawdataInitBean);
+            } else {
+                FileUtils.forceDelete(file);
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return filesBeDealedList;
     }
 }

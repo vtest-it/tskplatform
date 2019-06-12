@@ -25,7 +25,8 @@ public class TskProberMappingParse {
 	public void setGetRandomNumber(GetRandomNumber getRandomNumber) {
 		this.getRandomNumber = getRandomNumber;
 	}
-	public  void parse(File file, int gpibBin, RawdataInitBean bean) throws IOException
+
+	public void parse(File file, int gpibBin, RawdataInitBean bean, String waferId, String lot) throws IOException
 	{
 		LinkedHashMap<String,String> properties=new LinkedHashMap<>();
 		HashMap<Integer,HashMap<Integer,Integer>> siteBinSum=new HashMap<>();

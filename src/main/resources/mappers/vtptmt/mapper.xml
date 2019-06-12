@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.vtest.it.tskplatform.dao.vtptmt.VtptmtDao">
-    <select id="getInformation" parameterType="string" resultType="string">
-        select password from VTPTMT.system_user where user_name = #{username};
-    </select>
     <insert id="dataErrorsRecord">
         INSERT INTO VTPTMT.data_issue_record(custom_code, device, lot_id, cp_step, wafer_no,resource,issue_type,
         issue_level, issue_path, issue_description, deal_flag)
@@ -15,4 +12,7 @@
         </trim>
         ;
     </insert>
+    <select id="getCheckItemList" resultMap="itemsCheck">
+        SELECT property,check_NA,check_equals,custom_code,issue_level FROM  VTPTMT.rawdata_properties_check_items;
+    </select>
 </mapper>

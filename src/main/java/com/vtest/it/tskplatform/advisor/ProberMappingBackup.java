@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,11 +36,13 @@ public class ProberMappingBackup implements Ordered {
     private GetFileListNeedDeal getFileListNeedDeal;
     @Autowired
     private TskProberMappingParseCpAndWaferId tskProberMappingParseCpAndWaferId;
-    @Around("target(com.vtest.it.tskplatform.datadeal.TskPlatformDataDeal)&&execution(* deal(..))")
-    public void backupProberMapping(ProceedingJoinPoint proceedingJoinPoint) {
-        String regex="[0-9]{1,}";
-        Pattern pattern=Pattern.compile(regex);
-        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList((ArrayList<File>) (proceedingJoinPoint.getArgs()[0]), 30);
+
+    @Around("target(com.vtest.it.tskplatform.datadeal.TskPlatformDataDeal)&&execution(* deal(..))&&args(fileNeedCheckListPrimary)")
+    public void backupProberMapping(ArrayList<File> fileNeedCheckListPrimary, ProceedingJoinPoint proceedingJoinPoint) {
+        String regex = "[0-9]{1,}";
+        String format = "yyyyMMddHHmmss";
+        Pattern pattern = Pattern.compile(regex);
+        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList(fileNeedCheckListPrimary, 30);
         ArrayList<File> fileNeedDealList = new ArrayList<>();
         for (File file : fileNeedCheckList) {
             if (file.isFile()) {
@@ -63,18 +67,21 @@ public class ProberMappingBackup implements Ordered {
             if (null != customerCodeAndDeviceBean.getCustomerCode()) {
                 for (File wafer : file.listFiles()) {
                     try {
-                        String waferIdSurface=wafer.getName().substring(4);
+                        String waferIdSurface = wafer.getName().substring(4);
                         String result = tskProberMappingParseCpAndWaferId.parse(wafer);
-                        String waferFromFile=result.split(":")[0];
-                        String cpProcess=result.split(":")[1];
-                        Matcher matcher=pattern.matcher(cpProcess.substring(2));
-                        if ((!waferIdSurface.trim().equals(waferFromFile.trim()))||!matcher.find()){
-                            FileUtils.copyFile(wafer,new File(errorPath+"/waferCheckError/"+lot+"/"+wafer.getName()));
+                        String waferFromFile = result.split(":")[0];
+                        String cpProcess = result.split(":")[1];
+                        Matcher matcher = pattern.matcher(cpProcess.substring(2));
+                        String customerCode = customerCodeAndDeviceBean.getCustomerCode();
+                        String device = customerCodeAndDeviceBean.getDevice();
+                        FileUtils.copyFile(wafer, new File(backupPath + "/" + customerCode + "/" + device + "/" + lot + "/" + cpProcess + "/" + wafer.getName() + "_" + new SimpleDateFormat(format).format(new Date())));
+                        if ((!waferIdSurface.trim().equals(waferFromFile.trim())) || !matcher.find()) {
+                            FileUtils.copyFile(wafer, new File(errorPath + "/waferCheckError/" + lot + "/" + wafer.getName()));
                             FileUtils.forceDelete(wafer);
                         }
                     } catch (IOException e) {
                         try {
-                            FileUtils.copyFile(wafer,new File(errorPath+"/waferCheckError/"+lot+"/"+wafer.getName()));
+                            FileUtils.copyFile(wafer, new File(errorPath + "/waferCheckError/" + lot + "/" + wafer.getName()));
                             FileUtils.forceDelete(wafer);
                         } catch (IOException e1) {
                             e1.printStackTrace();
@@ -82,10 +89,10 @@ public class ProberMappingBackup implements Ordered {
                     }
                 }
                 try {
-                    if (file.listFiles().length>0){
+                    if (file.listFiles().length > 0) {
                         fileNeedDealList.add(file);
                         FileUtils.copyDirectory(file, new File(mapDownPath + "/" + file.getName()));
-                    }else {
+                    } else {
                         FileUtils.forceDelete(file);
                     }
                 } catch (IOException e) {

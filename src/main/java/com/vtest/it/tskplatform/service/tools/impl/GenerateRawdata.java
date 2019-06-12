@@ -18,11 +18,8 @@ import java.util.TreeMap;
 public class GenerateRawdata {
     @Value("${system.properties.tsk.temp-rawdata}")
     private String TempRawdata;
-    private GetRandomChar getRandomChar;
     @Autowired
-    public void setGetRandomChar(GetRandomChar getRandomChar) {
-        this.getRandomChar = getRandomChar;
-    }
+    private GetRandomChar getRandomChar;
     public File generate(RawdataInitBean rawdataInitBean) throws IOException
     {
         if (!new File(TempRawdata).exists()){
