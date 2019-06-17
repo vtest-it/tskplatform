@@ -1,340 +1,142 @@
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-210001, stmt-220001} created
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-210001, stmt-220001, rs-250001} query executed. 4.812201 millis. /* ping */ SELECT 1
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-210001, stmt-220001, rs-250001} open
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-210001, stmt-220001, rs-250001} Header: [1]
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-210001, stmt-220001, rs-250001} Result: [1]
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-210001, stmt-220001, rs-250001} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-210001, stmt-220001} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-110001, stmt-120001} created
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-110001, stmt-120001, rs-150001} query executed. 28.370225 millis. /* ping */ SELECT 1
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-110001, stmt-120001, rs-150001} open
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-110001, stmt-120001, rs-150001} Header: [1]
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-110001, stmt-120001, rs-150001} Result: [1]
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-110001, stmt-120001, rs-150001} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-110001, stmt-120001} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-110001} pool-recycle
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} setAutoCommit false
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20011} Parameters : [NL7NK-13, CP1]
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20011} Types : [VARCHAR, VARCHAR]
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20011} executed. 2384.992675 millis. {call WebMES.dbo.pro_GetWaferInfo(?,?)}
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20011, rs-50023} open
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20011, rs-50023} Header: [lot_id, inner_lot, inner_monther_lot, customer_code, device_name, wafer_id, lot_starttime, pe_owner, tester_SoftWare_revision, tester_model, chinese_name, chinese_shortname, part_num, process_spec, process_revision, worker_order, lot_status, wip_stage, wip_step, po_number, customer_to_customer_po_number, part_desc, map_or_ink, is_otp, is_cop, fab_device, asy_device, ship_lot, assigned_testers, is_trimed, load_file, customer_tester_spec, map_reference, process_short_flow, wafer_pcs, sites, site_to_site, continue_fail, prober_device, operator, tester_program, all_cp_programs, tester_id, prober_id, prober_card_id, cp_process, hold_count, test_start_time, test_end_time, test_gross_die, stand_gross_die, gross_die, pass_die, fail_die, wafer_yield, stop_yield, major_fail, process_yield, cp_yield, pass_bins, os_bins, special_bins, theory_test_time, retest_rate, data_base, test_time, wafer_id_read, wafer_sequence, wf_size, index_x, index_y, map_cols, map_rows, gpib_bin, notch, customer_notch, slot, right_id, minx, miny, maxx, maxy, test_die_minx, test_die_miny, test_die_maxx, test_die_maxy]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20011, rs-50023} Result: [NL7NK, SWTMD24002, SWTMD24002, SWT, SS388AG, NL7NK-13, 2019-06-12 16:07:48.44, Xiaoqi, CRAFT_3380_2.40-SP8_ForV_Test_4, Chroma, 中穎電子股份有限公司, NA, SWT_CSS388AG01, SWT_CSS388AG01, 4, SWT20190612.2, 1, B, CP1T0, SH-VT-CP1-1906040001, NA, NA, NA, 1, 0, NA, NA, NJCLW, NA, 0, NA, NA, NA, TB1-CP1-BK1-CP2-WPF, 25, 64, CP1:5;CP2:5, CP1:3; CP2:3; CP5:5;, SWT1SS388ATHECHA, NA, SS388A_3380_CP1_S0, CP1T0:SS388A_3380_CP1_S0;, TTH-19, PTS-09, SS388A-PC-C1C2, NA, 0, NA, NA, 8256, 8256, NA, NA, NA, NA, 93, NA, NA|98.00%, NA, 1, 8,18, NA, 0.30, NA, NA, NA, Slot, 1-25, 8, 1600, 2167, NA, NA, 0, 180-Degree, NA, 13, 13, NA, NA, NA, NA, NA, NA, NA, NA]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20011, rs-50023} closed
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, pstmt-20011} clearParameters. 
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} commited
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} setAutoCommit true
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} pool-recycle
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} pool-connect
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} setAutoCommit false
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20012} Parameters : [S1L753]
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20012} Types : [VARCHAR]
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20012} executed. 401.632735 millis. {call WebMES.dbo.pro_getSlotAndSequence(?)}
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20012, rs-50024} open
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20012, rs-50024} Header: [sequence, read_type, gpib_bin]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20012, rs-50024} Result: [1-25, SLOT, 0]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20012, rs-50024} closed
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, pstmt-20012} clearParameters. 
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} commited
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} setAutoCommit true
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} pool-recycle
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} pool-connect
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} setAutoCommit false
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20013} Parameters : [S1L753, 5]
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20013} Types : [VARCHAR, VARCHAR]
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20013} executed. 361.712376 millis. {call WebMES.dbo.pro_getWaferid(?,?)}
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20013, rs-50025} open
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20013, rs-50025} Header: [WaferID]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20013, rs-50025} Result: [S1L753-05]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20013, rs-50025} closed
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, pstmt-20013} clearParameters. 
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} commited
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} setAutoCommit true
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} pool-recycle
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} pool-connect
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} setAutoCommit false
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20011} Parameters : [S1L753-05, CP2]
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20011} Types : [VARCHAR, VARCHAR]
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, cstmt-20011} executed. 2376.523544 millis. {call WebMES.dbo.pro_GetWaferInfo(?,?)}
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20011, rs-50026} open
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20011, rs-50026} Header: [lot_id, inner_lot, inner_monther_lot, customer_code, device_name, wafer_id, lot_starttime, pe_owner, tester_SoftWare_revision, tester_model, chinese_name, chinese_shortname, part_num, process_spec, process_revision, worker_order, lot_status, wip_stage, wip_step, po_number, customer_to_customer_po_number, part_desc, map_or_ink, is_otp, is_cop, fab_device, asy_device, ship_lot, assigned_testers, is_trimed, load_file, customer_tester_spec, map_reference, process_short_flow, wafer_pcs, sites, site_to_site, continue_fail, prober_device, operator, tester_program, all_cp_programs, tester_id, prober_id, prober_card_id, cp_process, hold_count, test_start_time, test_end_time, test_gross_die, stand_gross_die, gross_die, pass_die, fail_die, wafer_yield, stop_yield, major_fail, process_yield, cp_yield, pass_bins, os_bins, special_bins, theory_test_time, retest_rate, data_base, test_time, wafer_id_read, wafer_sequence, wf_size, index_x, index_y, map_cols, map_rows, gpib_bin, notch, customer_notch, slot, right_id, minx, miny, maxx, maxy, test_die_minx, test_die_miny, test_die_maxx, test_die_maxy]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20011, rs-50026} Result: [S1L753, BFSMD24013, BFSMD24013, BFS, BP5131ZAC-CP, S1L753-05, 2019-06-11 13:07:07.85, Iris Zhang, NA, CP1:T862;CP2:M7000, 上海晶丰明源半导体有限公司, NA, BFS_CBP5131ZAC00, PS_BFS_CBP5131ZAC00, 1, BFS20190611.104703_46, 1, B, CP2T0, MP01-1906100009, NA, NA, OnlyMap, 0, 0, NA, NA, S0T706.05, NA, 0, NA, BP5131ZAC_CP_V0.1, NA, TB1-CP1-CP2-WV1-WP1-WPF, 25, 16, CP1:3;CP2:5, 10, BFS25131ZATNEAVA, NA, BP5131ZAA_CP_16S_V1P1, CP1T0:BP5131Z_V1.1.1;CP2T0:BP5131ZAA_CP_16S_V1P1;, TTM-13, PTS-39, BP5131ZAA-PC-C2-01, NA, 0, NA, NA, 62610, 60244, NA, NA, NA, NA, 92, 6, NA|97.00%, CP1&80.00%;, 1, 5, NA, 1.10, NA, NA, NA, Slot, 1-25, 8, 980, 490, NA, NA, 0, 180-Degree, NA, 5, 5, NA, NA, NA, NA, NA, NA, NA, NA]
+DEBUG scheduling-1 druid.sql.ResultSet - {conn-10003, cstmt-20011, rs-50026} closed
+DEBUG scheduling-1 druid.sql.Statement - {conn-10003, pstmt-20011} clearParameters. 
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} commited
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} setAutoCommit true
+DEBUG scheduling-1 druid.sql.Connection - {conn-10003} pool-recycle
+DEBUG scheduling-1 druid.sql.Connection - {conn-110001} pool-connect
+DEBUG scheduling-1 druid.sql.Connection - {conn-110001} setAutoCommit false
+DEBUG scheduling-1 druid.sql.Statement - {conn-110001, pstmt-120001} created. INSERT INTO VTPTMT.data_issue_record(custom_code, device, lot_id, cp_step, wafer_no,resource,issue_type,
+        issue_level, issue_path, issue_description, deal_flag)
+        VALUES
+         (?,?,?,?,?,?,?,?,?,?,?)  
+        ;
+DEBUG scheduling-1 druid.sql.Statement - {conn-110001, pstmt-120001} Parameters : [BFS, BP5131ZAC-CP, S1L753, CP2, S1L753-05, TSK, data Check, 5, na, it's different from : MES Test Gross Die and Gross Die, 0]
+DEBUG scheduling-1 druid.sql.Statement - {conn-110001, pstmt-120001} Types : [VARCHAR, VARCHAR, VARCHAR, VARCHAR, VARCHAR, VARCHAR, VARCHAR, INTEGER, VARCHAR, VARCHAR, INTEGER]
+DEBUG scheduling-1 druid.sql.Statement - {conn-110001, pstmt-120001} executed. 25.756791 millis. INSERT INTO VTPTMT.data_issue_record(custom_code, device, lot_id, cp_step, wafer_no,resource,issue_type,
+        issue_level, issue_path, issue_description, deal_flag)
+        VALUES
+         (?,?,?,?,?,?,?,?,?,?,?)  
+        ;
+DEBUG scheduling-1 druid.sql.Statement - {conn-110001, pstmt-120001} clearParameters. 
+DEBUG scheduling-1 druid.sql.Connection - {conn-110001} commited
+DEBUG scheduling-1 druid.sql.Connection - {conn-110001} setAutoCommit true
+DEBUG scheduling-1 druid.sql.Connection - {conn-110001} pool-recycle
 DEBUG main druid.sql.Connection - {conn-10001} connected
 DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} created
 DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} closed
-DEBUG main druid.sql.Connection - {conn-110001,procId-3656228} connected
-DEBUG main druid.sql.Connection - {conn-210001,procId-3656229} connected
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001, rs-50000} query executed. 100.033191 millis. SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Header: []
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000, rs-250000} query executed. 57.704598 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Header: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000, rs-150000} query executed. 8.949072 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Header: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-10001, stmt-20002} created
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-10001, stmt-20002, rs-50001} query executed. 20.834524 millis. SELECT 1
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-10001, stmt-20002, rs-50001} open
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-10001, stmt-20002, rs-50001} Header: []
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-10001, stmt-20002, rs-50001} Result: [1]
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-10001, stmt-20002, rs-50001} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-10001, stmt-20002} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-210001, stmt-220001} created
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-210001, stmt-220001, rs-250001} query executed. 2.758056 millis. /* ping */ SELECT 1
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-210001, stmt-220001, rs-250001} open
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-210001, stmt-220001, rs-250001} Header: [1]
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-210001, stmt-220001, rs-250001} Result: [1]
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-210001, stmt-220001, rs-250001} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-210001, stmt-220001} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-110001, stmt-120001} created
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-110001, stmt-120001, rs-150001} query executed. 13.169559 millis. /* ping */ SELECT 1
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-110001, stmt-120001, rs-150001} open
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-110001, stmt-120001, rs-150001} Header: [1]
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-110001, stmt-120001, rs-150001} Result: [1]
-DEBUG http-nio-10010-exec-3 druid.sql.ResultSet - {conn-110001, stmt-120001, rs-150001} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Statement - {conn-110001, stmt-120001} closed
-DEBUG http-nio-10010-exec-3 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, stmt-20003} created
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, stmt-20003} closed
-DEBUG scheduling-1 druid.sql.Connection - {conn-10001} closed
-DEBUG Druid-ConnectionPool-Create-1894338251 druid.sql.Connection - {conn-10002} connected
-DEBUG Druid-ConnectionPool-Create-1894338251 druid.sql.Statement - {conn-10002, stmt-20004} created
-DEBUG Druid-ConnectionPool-Create-1894338251 druid.sql.Statement - {conn-10002, stmt-20004} closed
-DEBUG scheduling-1 druid.sql.Connection - {conn-10002} pool-connect
-DEBUG scheduling-1 druid.sql.Statement - {conn-10002, cstmt-20005} created. {call WebMES.dbo.pro_GetLotDeviceInfo(?)}
-DEBUG scheduling-1 druid.sql.Statement - {conn-10002, cstmt-20005} Parameters : [A080P-000]
-DEBUG scheduling-1 druid.sql.Statement - {conn-10002, cstmt-20005} Types : [VARCHAR]
-DEBUG scheduling-1 druid.sql.Statement - {conn-10002, cstmt-20005} executed. 102.785274 millis. {call WebMES.dbo.pro_GetLotDeviceInfo(?)}
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10002, cstmt-20005, rs-50002} open
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10002, cstmt-20005, rs-50002} Header: [CustCode, CustPart, Lot]
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10002, cstmt-20005, rs-50002} closed
-DEBUG scheduling-1 druid.sql.Statement - {conn-10002, pstmt-20005} clearParameters. 
-DEBUG scheduling-1 druid.sql.Connection - {conn-10002} pool-recycle
-DEBUG http-nio-10010-exec-4 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG http-nio-10010-exec-4 druid.sql.Statement - {conn-110001, pstmt-120002} created. select password from VTPTMT.system_user where user_name = ?;
-DEBUG http-nio-10010-exec-4 druid.sql.Statement - {conn-110001, pstmt-120002} Parameters : [V010q]
-DEBUG http-nio-10010-exec-4 druid.sql.Statement - {conn-110001, pstmt-120002} Types : [VARCHAR]
-DEBUG http-nio-10010-exec-4 druid.sql.Statement - {conn-110001, pstmt-120002} executed. 40.545775 millis. select password from VTPTMT.system_user where user_name = ?;
-DEBUG http-nio-10010-exec-4 druid.sql.ResultSet - {conn-110001, pstmt-120002, rs-150002} open
-DEBUG http-nio-10010-exec-4 druid.sql.ResultSet - {conn-110001, pstmt-120002, rs-150002} Header: [password]
-DEBUG http-nio-10010-exec-4 druid.sql.ResultSet - {conn-110001, pstmt-120002, rs-150002} closed
-DEBUG http-nio-10010-exec-4 druid.sql.Statement - {conn-110001, pstmt-120002} clearParameters. 
-DEBUG http-nio-10010-exec-4 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG main druid.sql.Connection - {conn-10001} connected
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} created
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} closed
-DEBUG main druid.sql.Connection - {conn-110001,procId-3658718} connected
-DEBUG main druid.sql.Connection - {conn-210001,procId-3658721} connected
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001, rs-50000} query executed. 152.252818 millis. SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Header: []
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000, rs-250000} query executed. 34.941353 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Header: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000, rs-150000} query executed. 1.611746 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Header: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG scheduling-1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20002} created. {call WebMES.dbo.pro_GetWaferInfo(?,?)}
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20002} Parameters : [S1M062-19, CP1]
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20002} Types : [VARCHAR, VARCHAR]
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20002} executed. 3997.232985 millis. {call WebMES.dbo.pro_GetWaferInfo(?,?)}
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50001} open
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50001} Header: [lot_id, inner_lot, inner_monther_lot, customer_code, device_name, wafer_id, lot_starttime, pe_owner, tester_SoftWare_revision, tester_model, chinese_name, chinese_shortname, part_num, process_spec, process_revision, worker_order, lot_status, wip_stage, wip_step, po_number, customer_to_customer_po_number, part_desc, map_or_ink, is_otp, is_cop, fab_device, asy_device, ship_lot, assigned_testers, is_trimed, load_file, customer_tester_spec, map_reference, process_short_flow, wafer_pcs, sites, site_to_site, continue_fail, prober_device, operator, tester_program, all_cp_programs, tester_id, prober_id, prober_card_id, cp_process, hold_count, test_start_time, test_end_time, test_gross_die, stand_gross_die, gross_die, pass_die, fail_die, wafer_yield, stop_yield, major_fail, process_yield, cp_yield, pass_bins, os_bins, special_bins, theory_test_time, retest_rate, data_base, test_time, wafer_id_read, wafer_sequence, wf_size, index_x, index_y, map_cols, map_rows, gpib_bin, notch, customer_notch, slot, right_id, minx, miny, maxx, maxy, test_die_minx, test_die_miny, test_die_maxx, test_die_maxy]
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50001} Result: [S1M062, BFSMD23033.09, BFSMD23033, BFS, BP9934Z2AA-CP, S1M062-19, 2019-06-05 14:54:27.0, Xianpeng Ren, NA, CP1:T862;CP2:T862;CP3:T862;CP4:T862;CP5:M7000, 上海晶丰明源半导体有限公司, NA, BFS_CBP9934Z2AA01, PS_BFS_CBP9934Z2AA02, 2, BFS20190605.145314_31, 10, A, NA, MP01-1906040009, NA, NA, NA, 1, 0, NA, NA, S1M062, NA, 1, NA, BP9934Z2AA_CP_V0.5, NA, TB1-CP1-CP2-CP3-CP4-CP5-WV1-WP1-WPF, 7, 8, CP1:3;CP2:3;CP3:3;CP4:3;CP5:5, 10, BFS19934Z2TNE1RR, NA, BP9934Z2AA_CP_8S_V3P0, CP5T0:BP9934Z2AA_CP_8S_V3P0;, TTM-35, PTL-09, BP9934Z2AA-PC-11, NA, 0, NA, NA, 5, 24460, NA, NA, NA, NA, NA, NA, 0.00%|NA, CP3&100.00%;CP5&98.87%;, 1, 5, NA, NA, NA, NA, NA, Slot, 1-25, 8, 1314, 892, NA, NA, 0, 180-Degree, NA, 19, 19, NA, NA, NA, NA, NA, NA, NA, NA]
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50001} closed
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, pstmt-20002} clearParameters. 
-DEBUG scheduling-1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG scheduling-1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20002} Parameters : [S1M062-20, CP1]
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20002} Types : [VARCHAR, VARCHAR]
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20002} executed. 3295.093688 millis. {call WebMES.dbo.pro_GetWaferInfo(?,?)}
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50002} open
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50002} Header: [lot_id, inner_lot, inner_monther_lot, customer_code, device_name, wafer_id, lot_starttime, pe_owner, tester_SoftWare_revision, tester_model, chinese_name, chinese_shortname, part_num, process_spec, process_revision, worker_order, lot_status, wip_stage, wip_step, po_number, customer_to_customer_po_number, part_desc, map_or_ink, is_otp, is_cop, fab_device, asy_device, ship_lot, assigned_testers, is_trimed, load_file, customer_tester_spec, map_reference, process_short_flow, wafer_pcs, sites, site_to_site, continue_fail, prober_device, operator, tester_program, all_cp_programs, tester_id, prober_id, prober_card_id, cp_process, hold_count, test_start_time, test_end_time, test_gross_die, stand_gross_die, gross_die, pass_die, fail_die, wafer_yield, stop_yield, major_fail, process_yield, cp_yield, pass_bins, os_bins, special_bins, theory_test_time, retest_rate, data_base, test_time, wafer_id_read, wafer_sequence, wf_size, index_x, index_y, map_cols, map_rows, gpib_bin, notch, customer_notch, slot, right_id, minx, miny, maxx, maxy, test_die_minx, test_die_miny, test_die_maxx, test_die_maxy]
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50002} Result: [S1M062, BFSMD23033.10, BFSMD23033, BFS, BP9934Z2AA-CP, S1M062-20, 2019-06-05 14:54:27.0, Xianpeng Ren, NA, CP1:T862;CP2:T862;CP3:T862;CP4:T862;CP5:M7000, 上海晶丰明源半导体有限公司, NA, BFS_CBP9934Z2AA01, PS_BFS_CBP9934Z2AA02, 2, BFS20190605.145314_31, 1, C, CP5T0, MP01-1906040009, NA, NA, NA, 1, 0, NA, NA, S1M062, NA, 1, NA, BP9934Z2AA_CP_V0.5, NA, TB1-CP1-CP2-CP3-CP4-CP5-WV1-WP1-WPF, 1, 8, CP1:3;CP2:3;CP3:3;CP4:3;CP5:5, 10, BFS19934Z2TNE1RR, NA, BP9934Z2AA_CP_8S_V3P0, CP5T0:BP9934Z2AA_CP_8S_V3P0;, TTM-35, PTL-09, BP9934Z2AA-PC-11, NA, 0, NA, NA, 5, 24460, NA, NA, NA, NA, NA, NA, 0.00%|NA, CP3&80.00%;CP5&98.75%;, 1, 5, NA, NA, NA, NA, NA, Slot, 1-25, 8, 1314, 892, NA, NA, 0, 180-Degree, NA, 20, 20, NA, NA, NA, NA, NA, NA, NA, NA]
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50002} closed
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, pstmt-20002} clearParameters. 
-DEBUG scheduling-1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG main druid.sql.Connection - {conn-10001} connected
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} created
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} closed
-DEBUG main druid.sql.Connection - {conn-110001,procId-3661667} connected
-DEBUG main druid.sql.Connection - {conn-210001,procId-3661668} connected
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} created
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001, rs-50000} query executed. 99.113412 millis. SELECT 1
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} open
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Header: []
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Result: [1]
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} closed
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} closed
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} created
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000, rs-250000} query executed. 33.591548 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} open
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Header: [1]
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Result: [1]
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} closed
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} closed
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} created
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000, rs-150000} query executed. 1.905682 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} open
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Header: [1]
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Result: [1]
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} closed
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} closed
-DEBUG RMI TCP Connection(3)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG main druid.sql.Connection - {conn-10001} connected
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} created
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} closed
-DEBUG main druid.sql.Connection - {conn-110001,procId-3716815} connected
-DEBUG main druid.sql.Connection - {conn-210001,procId-3716816} connected
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001, rs-50000} query executed. 110.102122 millis. SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Header: []
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000, rs-250000} query executed. 51.758032 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Header: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000, rs-150000} query executed. 8.289527 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Header: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG main druid.sql.Connection - {conn-10001} connected
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} created
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} closed
-DEBUG main druid.sql.Connection - {conn-110001,procId-3720329} connected
-DEBUG main druid.sql.Connection - {conn-210001,procId-3720330} connected
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} created
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001, rs-50000} query executed. 101.199978 millis. SELECT 1
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} open
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Header: []
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} Result: [1]
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-10001, stmt-20001, rs-50000} closed
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Statement - {conn-10001, stmt-20001} closed
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-10001} pool-recycle
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} created
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000, rs-250000} query executed. 38.404176 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} open
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Header: [1]
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Result: [1]
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} closed
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} closed
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} created
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000, rs-150000} query executed. 2.316511 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} open
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Header: [1]
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Result: [1]
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} closed
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} closed
-DEBUG RMI TCP Connection(2)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG main druid.sql.Connection - {conn-10001} connected
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} created
-DEBUG main druid.sql.Statement - {conn-10001, stmt-20000} closed
-DEBUG main druid.sql.Connection - {conn-110001,procId-3723794} connected
-DEBUG main druid.sql.Connection - {conn-210001,procId-3723795} connected
-DEBUG scheduling-1 druid.sql.Connection - {conn-10001} pool-connect
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20001} created. {call WebMES.dbo.pro_GetWaferInfo(?,?)}
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20001} Parameters : [ASL731-20-F6, CP1]
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20001} Types : [VARCHAR, VARCHAR]
-DEBUG Druid-ConnectionPool-Create-117911771 druid.sql.Connection - {conn-10002} connected
-DEBUG Druid-ConnectionPool-Create-117911771 druid.sql.Statement - {conn-10002, stmt-20002} created
-DEBUG Druid-ConnectionPool-Create-117911771 druid.sql.Statement - {conn-10002, stmt-20002} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10002} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10002} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10002} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10002, stmt-20003} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10002, stmt-20003, rs-50000} query executed. 113.538068 millis. SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10002, stmt-20003, rs-50000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10002, stmt-20003, rs-50000} Header: []
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10002, stmt-20003, rs-50000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-10002, stmt-20003, rs-50000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-10002, stmt-20003} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-10002} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000, rs-250000} query executed. 59.74765 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Header: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-210001, stmt-220000, rs-250000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-210001, stmt-220000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-210001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-connect
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} created
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000, rs-150000} query executed. 2.016602 millis. /* ping */ SELECT 1
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} open
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Header: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} Result: [1]
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.ResultSet - {conn-110001, stmt-120000, rs-150000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Statement - {conn-110001, stmt-120000} closed
-DEBUG RMI TCP Connection(4)-127.0.0.1 druid.sql.Connection - {conn-110001} pool-recycle
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, cstmt-20001} executed. 662.091806 millis. {call WebMES.dbo.pro_GetWaferInfo(?,?)}
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20001, rs-50001} open
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20001, rs-50001} Header: [lot_id, inner_lot, inner_monther_lot, customer_code, device_name, wafer_id, lot_starttime, pe_owner, tester_SoftWare_revision, tester_model, chinese_name, chinese_shortname, part_num, process_spec, process_revision, worker_order, lot_status, wip_stage, wip_step, po_number, customer_to_customer_po_number, part_desc, map_or_ink, is_otp, is_cop, fab_device, asy_device, ship_lot, assigned_testers, is_trimed, load_file, customer_tester_spec, map_reference, process_short_flow, wafer_pcs, sites, site_to_site, continue_fail, prober_device, operator, tester_program, all_cp_programs, tester_id, prober_id, prober_card_id, cp_process, hold_count, test_start_time, test_end_time, test_gross_die, stand_gross_die, gross_die, pass_die, fail_die, wafer_yield, stop_yield, major_fail, process_yield, cp_yield, pass_bins, os_bins, special_bins, theory_test_time, retest_rate, data_base, test_time, wafer_id_read, wafer_sequence, wf_size, index_x, index_y, map_cols, map_rows, gpib_bin, notch, customer_notch, slot, right_id, minx, miny, maxx, maxy, test_die_minx, test_die_miny, test_die_maxx, test_die_maxy]
-DEBUG scheduling-1 druid.sql.ResultSet - {conn-10001, cstmt-20001, rs-50001} closed
-DEBUG scheduling-1 druid.sql.Statement - {conn-10001, pstmt-20001} clearParameters. 
-DEBUG scheduling-1 druid.sql.Connection - {conn-10001} pool-recycle
+DEBUG main druid.sql.Connection - {conn-110001,procId-138642} connected
+DEBUG main druid.sql.Connection - {conn-210001,procId-138643} connected
+DEBUG main druid.sql.Connection - {conn-10001} pool-connect
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20001} created. {call WebMES.dbo.pro_getWaferid(?,?)}
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20001} Parameters : [S1L724, 1]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20001} Types : [VARCHAR, VARCHAR]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20001} executed. 60.382023 millis. {call WebMES.dbo.pro_getWaferid(?,?)}
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20001, rs-50000} open
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20001, rs-50000} Header: [WaferID]
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20001, rs-50000} Result: [S1L724-01]
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20001, rs-50000} closed
+DEBUG main druid.sql.Statement - {conn-10001, pstmt-20001} clearParameters. 
+DEBUG main druid.sql.Connection - {conn-10001} pool-recycle
+DEBUG main druid.sql.Connection - {conn-10001} pool-connect
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20002} created. {call WebMES.dbo.pro_getSlotAndSequence(?)}
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20002} Parameters : [S1L724]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20002} Types : [VARCHAR]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20002} executed. 104.88848 millis. {call WebMES.dbo.pro_getSlotAndSequence(?)}
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50001} open
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50001} Header: [sequence, read_type, gpib_bin]
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50001} Result: [1-25, SLOT, 0]
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20002, rs-50001} closed
+DEBUG main druid.sql.Statement - {conn-10001, pstmt-20002} clearParameters. 
+DEBUG main druid.sql.Connection - {conn-10001} pool-recycle
+DEBUG main druid.sql.Connection - {conn-10001} pool-connect
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20003} created. {call WebMES.dbo.pro_GetWaferInfo(?,?)}
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20003} Parameters : [S1L724-01, CP1]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20003} Types : [VARCHAR, VARCHAR]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20003} executed. 3013.29157 millis. {call WebMES.dbo.pro_GetWaferInfo(?,?)}
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20003, rs-50002} open
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20003, rs-50002} Header: [lot_id, inner_lot, inner_monther_lot, customer_code, device_name, wafer_id, lot_starttime, pe_owner, tester_SoftWare_revision, tester_model, chinese_name, chinese_shortname, part_num, process_spec, process_revision, worker_order, lot_status, wip_stage, wip_step, po_number, customer_to_customer_po_number, part_desc, map_or_ink, is_otp, is_cop, fab_device, asy_device, ship_lot, assigned_testers, is_trimed, load_file, customer_tester_spec, map_reference, process_short_flow, wafer_pcs, sites, site_to_site, continue_fail, prober_device, operator, tester_program, all_cp_programs, tester_id, prober_id, prober_card_id, cp_process, hold_count, test_start_time, test_end_time, test_gross_die, stand_gross_die, gross_die, pass_die, fail_die, wafer_yield, stop_yield, major_fail, process_yield, cp_yield, pass_bins, os_bins, special_bins, theory_test_time, retest_rate, data_base, test_time, wafer_id_read, wafer_sequence, wf_size, index_x, index_y, map_cols, map_rows, gpib_bin, notch, customer_notch, slot, right_id, minx, miny, maxx, maxy, test_die_minx, test_die_miny, test_die_maxx, test_die_maxy]
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20003, rs-50002} Result: [S1L724, BFSMD23012.05, BFSMD23012, BFS, BP5131ZAC-CP, S1L724-01, 2019-06-04 11:32:12.0, Iris Zhang, NA, CP1:T862;CP2:M7000, �Ϻ�������Դ�뵼�����޹�˾, NA, BFS_CBP5131ZAC00, PS_BFS_CBP5131ZAC00, 1, BFS20190604.112913_31, 10, A, NA, MP01-1906030008, NA, NA, OnlyMap, 0, 0, NA, NA, S0T706.05, NA, 0, NA, BP5131ZAC_CP_V0.1, NA, TB1-CP1-CP2-WV1-WP1-WPF, 12, 16, CP1:3;CP2:5, 10, BFS15131ZATNE1RR, NA, BP5131ZAA_CP_16S_V1P1, CP2T0:BP5131ZAA_CP_16S_V1P1;, TTM-04, PTS-23, BP5131ZAA-PC-C2, NA, 0, NA, NA, 5, 60244, NA, NA, NA, NA, NA, 6, 0.00%|NA, CP2&99.67%;, 1, 0, 8, NA, NA, NA, NA, Slot, 1-25, 8, 980, 490, NA, NA, 0, 180-Degree, NA, 1, 1, NA, NA, NA, NA, NA, NA, NA, NA]
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20003, rs-50002} closed
+DEBUG main druid.sql.Statement - {conn-10001, pstmt-20003} clearParameters. 
+DEBUG main druid.sql.Connection - {conn-10001} pool-recycle
+DEBUG main druid.sql.Connection - {conn-10001} pool-connect
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20004} created. {call WebMES.dbo.pro_GetLotDeviceInfo(?)}
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20004} Parameters : [dsad]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20004} Types : [VARCHAR]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20004} executed. 31.884241 millis. {call WebMES.dbo.pro_GetLotDeviceInfo(?)}
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50003} open
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50003} Header: [CustCode, CustPart, Lot]
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50003} closed
+DEBUG main druid.sql.Statement - {conn-10001, pstmt-20004} clearParameters. 
+DEBUG main druid.sql.Connection - {conn-10001} pool-recycle
+DEBUG main druid.sql.Connection - {conn-10001} pool-connect
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20004} Parameters : [S1L724]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20004} Types : [VARCHAR]
+DEBUG main druid.sql.Statement - {conn-10001, cstmt-20004} executed. 81.536082 millis. {call WebMES.dbo.pro_GetLotDeviceInfo(?)}
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50004} open
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50004} Header: [CustCode, CustPart, Lot]
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50004} Result: [BFS, BP5131ZAC-CP, S1L724]
+DEBUG main druid.sql.ResultSet - {conn-10001, cstmt-20004, rs-50004} closed
+DEBUG main druid.sql.Statement - {conn-10001, pstmt-20004} clearParameters. 
+DEBUG main druid.sql.Connection - {conn-10001} pool-recycle
+DEBUG main druid.sql.Connection - {conn-310001} connected
+DEBUG main druid.sql.Statement - {conn-310001, stmt-320000} created
+DEBUG main druid.sql.Statement - {conn-310001, stmt-320000} closed
+DEBUG main druid.sql.Connection - {conn-410001,procId-138664} connected
+DEBUG main druid.sql.Connection - {conn-510001,procId-138665} connected
+DEBUG Thread-2 druid.sql.Connection - {conn-210001} closed
+DEBUG Thread-2 druid.sql.Statement - {conn-10001, cstmt-20001} closed
+DEBUG Thread-5 druid.sql.Connection - {conn-510001} closed
+DEBUG Thread-2 druid.sql.Statement - {conn-10001, cstmt-20002} closed
+DEBUG Thread-5 druid.sql.Connection - {conn-310001} closed
+DEBUG Thread-2 druid.sql.Statement - {conn-10001, cstmt-20003} closed
+DEBUG Thread-5 druid.sql.Connection - {conn-410001} closed
+DEBUG Thread-2 druid.sql.Statement - {conn-10001, cstmt-20004} closed
+DEBUG Thread-2 druid.sql.Connection - {conn-10001} closed
+DEBUG Thread-2 druid.sql.Connection - {conn-110001} closed

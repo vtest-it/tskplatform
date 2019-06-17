@@ -37,12 +37,12 @@ public class ProberMappingBackup implements Ordered {
     @Autowired
     private TskProberMappingParseCpAndWaferId tskProberMappingParseCpAndWaferId;
 
-    @Around("target(com.vtest.it.tskplatform.datadeal.TskPlatformDataDeal)&&execution(* deal(..))&&args(fileNeedCheckListPrimary)")
-    public void backupProberMapping(ArrayList<File> fileNeedCheckListPrimary, ProceedingJoinPoint proceedingJoinPoint) {
+    @Around("target(com.vtest.it.tskplatform.datadeal.TskPlatformDataDeal)&&execution(* deal(..))")
+    public void backupProberMapping(ProceedingJoinPoint proceedingJoinPoint) {
         String regex = "[0-9]{1,}";
         String format = "yyyyMMddHHmmss";
         Pattern pattern = Pattern.compile(regex);
-        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList(fileNeedCheckListPrimary, 30);
+        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList((ArrayList<File>) proceedingJoinPoint.getArgs()[0], 30);
         ArrayList<File> fileNeedDealList = new ArrayList<>();
         for (File file : fileNeedCheckList) {
             if (file.isFile()) {

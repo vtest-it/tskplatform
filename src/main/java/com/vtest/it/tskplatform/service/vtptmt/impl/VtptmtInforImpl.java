@@ -1,11 +1,14 @@
 package com.vtest.it.tskplatform.service.vtptmt.impl;
 
 import com.vtest.it.tskplatform.dao.vtptmt.VtptmtDao;
+import com.vtest.it.tskplatform.pojo.mes.MesProperties;
+import com.vtest.it.tskplatform.pojo.vtptmt.BinWaferInforBean;
 import com.vtest.it.tskplatform.pojo.vtptmt.CheckItemBean;
 import com.vtest.it.tskplatform.pojo.vtptmt.DataInforToMesBean;
 import com.vtest.it.tskplatform.pojo.vtptmt.DataParseIssueBean;
 import com.vtest.it.tskplatform.service.vtptmt.VtptmtInfor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -36,5 +39,47 @@ public class VtptmtInforImpl implements VtptmtInfor {
     @Cacheable(cacheNames = {"SystemPropertiesCache"}, key = "#root.methodName")
     public ArrayList<DataInforToMesBean> getList() {
         return vtptmtDao.getList();
+    }
+
+    @Override
+    @Cacheable(cacheNames = {"SystemPropertiesCache"}, key = "#root.methodName")
+    public ArrayList<BinWaferInforBean> getTesterStatus() {
+        return vtptmtDao.getTesterStatus();
+    }
+
+    @Override
+    @Cacheable(cacheNames = {"SystemPropertiesCache"}, key = "#root.methodName+'&'+#tester")
+    public BinWaferInforBean getTesterStatusSingle(String tester) {
+        return vtptmtDao.getTesterStatusSingle(tester);
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
+    public int insertWaferInforToBinWaferSummary(BinWaferInforBean binWaferInforBean) {
+        return vtptmtDao.insertWaferInforToBinWaferSummary(binWaferInforBean);
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
+    public void waferFailTypeCheckOthers(String waferId, String cpProcess, String tester) {
+        vtptmtDao.waferFailTypeCheckOthers(waferId, cpProcess, tester);
+    }
+
+    @Override
+    @Cacheable(cacheNames = {"SystemPropertiesCache"}, key = "#root.methodName")
+    public MesProperties getProperties() {
+        return vtptmtDao.getProperties();
+    }
+
+    @Override
+    @CacheEvict(cacheNames = {"SystemPropertiesCache"}, key = "'getProperties'")
+    public int updateProperties(MesProperties mesProperties) {
+        return vtptmtDao.updateProperties(mesProperties);
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
+    public void singleWaferDeal(BinWaferInforBean binWaferInforBean, String waferId, String cpProcess, String tester) {
+        vtptmtDao.insertWaferInforToBinWaferSummary(binWaferInforBean);
+        vtptmtDao.waferFailTypeCheckOthers(waferId, cpProcess, tester);
     }
 }

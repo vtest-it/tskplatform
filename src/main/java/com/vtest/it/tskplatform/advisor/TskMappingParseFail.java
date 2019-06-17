@@ -1,9 +1,12 @@
 package com.vtest.it.tskplatform.advisor;
 
 import com.vtest.it.tskplatform.pojo.mes.SlotAndSequenceConfigBean;
+import com.vtest.it.tskplatform.pojo.rawdataBean.RawdataInitBean;
 import com.vtest.it.tskplatform.pojo.vtptmt.DataParseIssueBean;
+import com.vtest.it.tskplatform.service.tools.impl.FailDieCheck.AdjacentFailDieCheck;
 import com.vtest.it.tskplatform.service.tools.impl.rawdataCheck.GetIssueBean;
 import com.vtest.it.tskplatform.service.vtptmt.impl.VtptmtInforImpl;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ public class TskMappingParseFail implements Ordered {
     private GetIssueBean getIssueBean;
     @Autowired
     private VtptmtInforImpl vtptmtInfor;
+    @Autowired
+    private AdjacentFailDieCheck adjacentFailDieCheck;
     @Override
     public int getOrder() {
         return 0;
@@ -36,5 +41,10 @@ public class TskMappingParseFail implements Ordered {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @AfterReturning(value = "execution(* generateRawdata(..)) && target(com.vtest.it.tskplatform.datadeal.GenerateRawdataInitInformation)", returning = "rawdataInitBean")
+    public void optimizeRawdataBean(RawdataInitBean rawdataInitBean) {
+        adjacentFailDieCheck.perfectDeal(rawdataInitBean);
     }
 }

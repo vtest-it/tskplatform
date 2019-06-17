@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.vtest.it.tskplatform.dao.prober.ProberDao">
-
+    <delete id="deleteSiteInforToBinInfoSummary">
+          DELETE FROM vtdaprober.bin_info_summary WHERE custom_code=#{customerCode} AND device=#{device} AND lot_id=#{lot} AND cp_step=#{cp} AND wafer_no =#{waferId};
+    </delete>
+    <insert id="insertSiteInforToBinInfoSummary">
+        INSERT INTO vtdaprober.bin_info_summary(custom_code, device, lot_id, cp_step, wafer_no, site_id, soft_bin_no,
+        bin_count, pass_fail, test_type)
+        VALUES
+        <trim suffix="" suffixOverrides=",">
+            <foreach collection="siteMap" index="site" item="binItem">
+                <foreach collection="binItem" index="binNo" item="binValue">
+                    <choose>
+                        <when test="passBins.contains(binNo)">
+                            (#{customerCode},#{device},#{lot},#{cp},#{waferId},#{site},#{binNo},#{binValue},TRUE,#{testType}),
+                        </when>
+                        <otherwise>
+                            (#{customerCode},#{device},#{lot},#{cp},#{waferId},#{site},#{binNo},#{binValue},FALSE,#{testType}),
+                        </otherwise>
+                    </choose>
+                </foreach>
+            </foreach>
+        </trim>
+        ;
+    </insert>
+    <insert id="insertWaferInforToBinWaferSummary" parameterType="com.vtest.it.pojo.binwaferinfors.BinWaferInforBean">
+        INSERT INTO vtdaprober.bin_wafer_summary(custom_code, device, lot_id, cp_step, wafer_no, oprator, tester_program, tester_id, prober_id, Prober_card_id, pid_name, pid_version, start_time, gross_die, pass_die, fail_die, yield, end_time, check_status, map_cols, map_rows, min_x, min_y, others_params)
+        VALUES ( #{customerCode},#{device},#{lotId},#{cpStep},#{waferNo},#{oprator},#{testerProgram},#{testerId},#{proberId},#{proberCardId},#{pidName},#{pidVersion},#{startTime},#{grossDie},#{passDie},#{failDie},#{yield},#{endTime},#{checkStatus},#{mapCols},#{mapRows},#{minX},#{minY},#{othersParams})
+        ON DUPLICATE KEY UPDATE oprator=#{oprator}, tester_program=#{testerProgram}, tester_id=#{testerId}, prober_id=#{proberId}, Prober_card_id=#{proberCardId}, pid_name=#{pidName}, pid_version=#{pidVersion}, start_time=#{startTime}, gross_die=#{grossDie}, pass_die=#{passDie}, fail_die=#{failDie}, yield=#{yield}, end_time=#{endTime}, check_status=#{checkStatus}, map_cols=#{mapCols}, map_rows=#{mapRows}, min_x=#{minX}, min_y=#{minY}, others_params=#{othersParams},load_time=now();
+    </insert>
 </mapper>

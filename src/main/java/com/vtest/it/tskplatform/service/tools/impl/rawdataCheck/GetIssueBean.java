@@ -54,9 +54,13 @@ public class GetIssueBean {
         } else {
             dataParseIssueBean.setIssueType("mes information");
         }
-        dataParseIssueBean.setIssuePath(errorPath + "/waferCheckError/" + lot + "/" + file.getName());
-        FileUtils.copyFile(file, new File(errorPath + "/waferCheckError/" + lot + "/" + file.getName()));
-        FileUtils.forceDeleteOnExit(file);
+        dataParseIssueBean.setIssuePath(errorPath + "mappingParseError/" + lot + "/" + file.getName());
+        FileUtils.copyFile(file, new File(errorPath + "mappingParseError/" + lot + "/" + file.getName()));
+        try {
+            FileUtils.forceDelete(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return dataParseIssueBean;
     }
 }

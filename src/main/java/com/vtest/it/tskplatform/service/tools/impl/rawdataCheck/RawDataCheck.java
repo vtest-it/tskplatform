@@ -1,8 +1,8 @@
 package com.vtest.it.tskplatform.service.tools.impl.rawdataCheck;
 
-import com.vtest.it.tskplatform.dao.vtptmt.VtptmtDao;
 import com.vtest.it.tskplatform.pojo.vtptmt.CheckItemBean;
 import com.vtest.it.tskplatform.pojo.vtptmt.DataParseIssueBean;
+import com.vtest.it.tskplatform.service.vtptmt.impl.VtptmtInforImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +17,14 @@ import java.util.Set;
 @Service
 public class RawDataCheck {
     @Autowired
-    private VtptmtDao vtptmtDao;
+    private VtptmtInforImpl vtptmtInfor;
     @Autowired
     private GetIssueBean getIssueBean;
 
     public boolean check(File rawdata, ArrayList<DataParseIssueBean> issueBeans) {
         HashMap<String, String> waferInfor = new HashMap<>();
         try {
-            ArrayList<CheckItemBean> checkItems = vtptmtDao.getCheckItemList();
+            ArrayList<CheckItemBean> checkItems = vtptmtInfor.getCheckItemList();
             HashMap<Integer, Integer> actualSummaryMap = new HashMap<>();
             HashMap<Integer, Integer> theroySummaryMap = new HashMap<>();
             ArrayList<String> markAndSkipDieMap = new ArrayList<>();
