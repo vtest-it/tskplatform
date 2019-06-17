@@ -1,5 +1,6 @@
 package com.vtest.it.tskplatform.advisor;
 
+import com.alibaba.fastjson.JSON;
 import com.vtest.it.tskplatform.pojo.rawdataBean.RawdataInitBean;
 import com.vtest.it.tskplatform.pojo.vtptmt.BinWaferInforBean;
 import com.vtest.it.tskplatform.service.prober.impl.ProberServicesImpl;
@@ -62,6 +63,8 @@ public class DataPerfect {
             for (int i = 0; i < passBins.length; i++) {
                 passBinsArray.add(Integer.valueOf(passBins[i]));
             }
+            //maybe test time is later than base ,it is not should be insert into database;
+            System.err.println(JSON.toJSONString(binWaferInforBean));
             proberServices.singleWaferDeal(binWaferInforBean, customerCode, device, lot, cp, waferId, rawdataInitBean.getSiteBinSum(), "N", passBinsArray);
             vtptmtInfor.singleWaferDeal(binWaferInforBean, waferId, cp, tester);
         }

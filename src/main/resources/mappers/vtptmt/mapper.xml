@@ -8,6 +8,10 @@
         <result property="customCode" column="custom_code"/>
         <result property="level" column="issue_level"/>
     </resultMap>
+    <resultMap id="ifInforIntoMes" type="com.vtest.it.tskplatform.pojo.vtptmt.DataInforToMesBean">
+        <result property="customCode" column="custom_code"/>
+        <result property="device" column="device"/>
+    </resultMap>
     <insert id="dataErrorsRecord">
         INSERT INTO VTPTMT.data_issue_record(custom_code, device, lot_id, cp_step, wafer_no,resource,issue_type,
         issue_level, issue_path, issue_description, deal_flag)
@@ -22,8 +26,8 @@
     <select id="getCheckItemList" resultMap="itemsCheck">
         SELECT property,check_NA,check_equals,custom_code,issue_level FROM  VTPTMT.rawdata_properties_check_items;
     </select>
-    <select id="getList" resultMap="list">
-        SELECT custom_code as customCode,device FROM VTPTMT.mes_data_from;
+    <select id="getList" resultMap="ifInforIntoMes">
+         SELECT custom_code,device FROM VTPTMT.mes_data_from;
     </select>
     <select id="getTesterStatus" resultType="com.vtest.it.tskplatform.pojo.vtptmt.BinWaferInforBean">
        SELECT custom_code as customer_code,device, lot_id, cp_step, wafer_no, oprator, tester_program, tester_id, prober_id, Prober_card_id, pid_name, pid_version, start_time, gross_die, pass_die, fail_die, yield, end_time, check_status, check_result,map_cols, map_rows, min_x, min_y, others_params FROM VTPTMT.bin_wafer_summary;
@@ -40,10 +44,10 @@
     <update id="waferFailTypeCheckOthers" statementType="CALLABLE">
         {call e_updatecheckwafinfo(#{waferId,mode=IN,jdbcType=VARCHAR},#{cp,mode=IN,jdbcType=VARCHAR},#{tester,mode=IN,jdbcType=VARCHAR})}
     </update>
-    <select id="getProperties" resultType="com.vtest.it.pojo.MesProperties">
+    <select id="getProperties" resultType="com.vtest.it.tskplatform.pojo.mes.MesProperties">
       SELECT host,init_url,acode FROM VTPTMT.mesconfig;
     </select>
-    <update id="updateProperties" parameterType="properties">
+    <update id="updateProperties" parameterType="com.vtest.it.tskplatform.pojo.mes.MesProperties">
       UPDATE VTPTMT.mesconfig SET host=#{host},init_url=#{initUrl},acode=#{acode} WHERE status=TRUE ;
     </update>
 </mapper>

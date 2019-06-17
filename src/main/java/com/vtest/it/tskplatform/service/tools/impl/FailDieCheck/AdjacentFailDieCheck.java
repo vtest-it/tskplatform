@@ -93,6 +93,7 @@ public class AdjacentFailDieCheck extends AbstractRawDataAfterDeal {
             if (stringBuilder.toString().length() == 0) {
                 stringBuilder.append("normal");
             }
+
             binWaferInforBean.setCheckResult(stringBuilder.toString());
         } catch (Exception e) {
             e.printStackTrace();
