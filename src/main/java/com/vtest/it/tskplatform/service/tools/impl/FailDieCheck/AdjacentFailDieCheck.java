@@ -4,12 +4,13 @@ package com.vtest.it.tskplatform.service.tools.impl.FailDieCheck;
 import com.vtest.it.tskplatform.pojo.rawdataBean.RawdataInitBean;
 import com.vtest.it.tskplatform.pojo.vtptmt.BinWaferInforBean;
 import com.vtest.it.tskplatform.service.tools.impl.AbstractRawDataAfterDeal;
-import com.vtest.it.tskplatform.service.vtptmt.impl.VtptmtInforImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 @Service
 public class AdjacentFailDieCheck extends AbstractRawDataAfterDeal {
@@ -17,28 +18,11 @@ public class AdjacentFailDieCheck extends AbstractRawDataAfterDeal {
     private AdjacentFailDieCheckTool adjacentFailDieCheckTool;
     @Autowired
     private FailTypeCheck failTypeCheck;
-    @Autowired
-    private VtptmtInforImpl vtptmtInfor;
 
     @Override
     public void deal(RawdataInitBean rawdataInitBean, BinWaferInforBean binWaferInforBean) {
         try {
             LinkedHashMap<String, String> properties = rawdataInitBean.getProperties();
-            String tester = properties.get("Tester ID");
-            if (tester.equals("NA")) {
-                return;
-            }
-            try {
-                String endTime = properties.get("Test End Time").substring(0, 14);
-                Date testEndTime = new SimpleDateFormat("yyyyMMddHHmmss").parse(endTime);
-                BinWaferInforBean dbOldTesterStatus = vtptmtInfor.getTesterStatusSingle(tester);
-                Date dbEendTime = dbOldTesterStatus.getEndTime();
-                if (dbEendTime.getTime() > testEndTime.getTime()) {
-                    return;
-                }
-            } catch (Exception e) {
-
-            }
             ArrayList<String> passBins = new ArrayList<>();
             for (String bin : properties.get("Pass Bins").split(",")) {
                 passBins.add(bin);
@@ -93,7 +77,6 @@ public class AdjacentFailDieCheck extends AbstractRawDataAfterDeal {
             if (stringBuilder.toString().length() == 0) {
                 stringBuilder.append("normal");
             }
-
             binWaferInforBean.setCheckResult(stringBuilder.toString());
         } catch (Exception e) {
             e.printStackTrace();

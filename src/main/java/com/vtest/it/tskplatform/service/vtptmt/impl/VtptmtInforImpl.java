@@ -10,6 +10,7 @@ import com.vtest.it.tskplatform.service.vtptmt.VtptmtInfor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -78,6 +79,10 @@ public class VtptmtInforImpl implements VtptmtInfor {
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
+    @Caching(evict = {
+            @CacheEvict(cacheNames = {"SystemPropertiesCache"}, key = "'getTesterStatusSingle&'+#tester"),
+            @CacheEvict(cacheNames = {"SystemPropertiesCache"}, key = "'getTesterStatus'")
+    })
     public void singleWaferDeal(BinWaferInforBean binWaferInforBean, String waferId, String cpProcess, String tester) {
         vtptmtDao.insertWaferInforToBinWaferSummary(binWaferInforBean);
         vtptmtDao.waferFailTypeCheckOthers(waferId, cpProcess, tester);
