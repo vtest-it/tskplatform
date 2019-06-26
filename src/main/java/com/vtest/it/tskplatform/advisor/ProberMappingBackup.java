@@ -69,12 +69,21 @@ public class ProberMappingBackup implements Ordered {
                     try {
                         String waferIdSurface = wafer.getName().substring(4);
                         String result = tskProberMappingParseCpAndWaferId.parse(wafer);
-                        String waferFromFile = result.split(":")[0];
-                        String cpProcess = result.split(":")[1];
+                        String waferFromFile = result.split(":")[0].trim();
+                        String cpProcess = result.split(":")[1].trim();
                         Matcher matcher = pattern.matcher(cpProcess.substring(2));
                         String customerCode = customerCodeAndDeviceBean.getCustomerCode();
                         String device = customerCodeAndDeviceBean.getDevice();
-                        FileUtils.copyFile(wafer, new File(backupPath + "/" + customerCode + "/" + device + "/" + lot + "/" + cpProcess + "/" + wafer.getName() + "_" + new SimpleDateFormat(format).format(new Date())));
+                        try {
+                            Integer slot = Integer.valueOf(waferIdSurface.substring(0, 3));
+                            String waferId = getMesInfor.getWaferIdBySlot(lot, "" + slot);
+                            CustomerCodeAndDeviceBean customerCodeAndDeviceBeanByWaferAndCpStep = getMesInfor.getCustomerAndDeviceByWaferAndCpStep(waferId, cpProcess);
+                            if ((null != customerCodeAndDeviceBeanByWaferAndCpStep.getCustomerCode())) {
+                                FileUtils.copyFile(wafer, new File(backupPath + "/" + customerCode + "/" + customerCodeAndDeviceBeanByWaferAndCpStep.getDevice() + "/" + lot + "/" + cpProcess + "/" + wafer.getName() + "_" + new SimpleDateFormat(format).format(new Date())));
+                            }
+                        } catch (Exception e) {
+                            FileUtils.copyFile(wafer, new File(backupPath + "/" + customerCode + "/" + device + "/" + lot + "/" + cpProcess + "/" + wafer.getName() + "_" + new SimpleDateFormat(format).format(new Date())));
+                        }
                         if ((!waferIdSurface.trim().equals(waferFromFile.trim())) || !matcher.find()) {
                             FileUtils.copyFile(wafer, new File(errorPath + "/waferCheckError/" + lot + "/" + wafer.getName()));
                             FileUtils.forceDelete(wafer);

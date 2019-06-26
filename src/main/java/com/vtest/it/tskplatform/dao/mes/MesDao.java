@@ -14,4 +14,6 @@ public interface MesDao {
     public SlotAndSequenceConfigBean getLotSlotConfig(@Param("lot") String lot);
     public MesConfigBean getWaferConfigFromMes(@Param("waferId") String waferId, @Param("cpProcess") String cpProcess);
     public CustomerCodeAndDeviceBean getCustomerAndDeviceByLot(@Param("lot")String lot);
+
+    public CustomerCodeAndDeviceBean getCustomerAndDeviceByWaferAndCpStep(@Param("waferId") String waferId, @Param("cpStep") String cpStep);
 }

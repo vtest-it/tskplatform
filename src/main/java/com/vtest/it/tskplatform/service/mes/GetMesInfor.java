@@ -9,4 +9,6 @@ public interface GetMesInfor {
     public SlotAndSequenceConfigBean getLotSlotConfig(String lot);
     public MesConfigBean getWaferConfigFromMes(String waferId,String cpProcess);
     public CustomerCodeAndDeviceBean getCustomerAndDeviceByLot(String lot);
+
+    public CustomerCodeAndDeviceBean getCustomerAndDeviceByWaferAndCpStep(String waferId, String cpStep);
 }

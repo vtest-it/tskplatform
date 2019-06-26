@@ -40,7 +40,7 @@ public class GetIssueBean {
 
     public DataParseIssueBean getDataBeanForException(int level, String description, File file, String waferId, String lot) throws IOException {
         String cpProcess = tskProberMappingParseCpAndWaferId.parse(file).split(":")[1];
-        CustomerCodeAndDeviceBean customerCodeAndDeviceBean = getMesInfor.getCustomerAndDeviceByLot(lot);
+        CustomerCodeAndDeviceBean customerCodeAndDeviceBean = getMesInfor.getCustomerAndDeviceByWaferAndCpStep(waferId, cpProcess);
         HashMap<String, String> waferInfor = new HashMap<>();
         waferInfor.put("customCode", customerCodeAndDeviceBean.getCustomerCode());
         waferInfor.put("device", customerCodeAndDeviceBean.getDevice());
