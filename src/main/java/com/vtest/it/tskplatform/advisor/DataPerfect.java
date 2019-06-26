@@ -51,6 +51,11 @@ public class DataPerfect {
     @Async
     public void adjacentDieCheck(RawdataInitBean rawdataInitBean, boolean checkFlag) {
         if (checkFlag) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             BinWaferInforBean binWaferInforBean = new BinWaferInforBean();
             generateVtptmtWaferInforBean.generate(rawdataInitBean, binWaferInforBean);
             adjacentFailDieCheck.deal(rawdataInitBean, binWaferInforBean);

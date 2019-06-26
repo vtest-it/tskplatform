@@ -75,7 +75,7 @@ public class ProberMappingBackup implements Ordered {
                         String customerCode = customerCodeAndDeviceBean.getCustomerCode();
                         String device = customerCodeAndDeviceBean.getDevice();
                         try {
-                            Integer slot = Integer.valueOf(waferIdSurface.substring(0, 3));
+                            Integer slot = Integer.valueOf(wafer.getName().substring(0, 3));
                             String waferId = getMesInfor.getWaferIdBySlot(lot, "" + slot);
                             CustomerCodeAndDeviceBean customerCodeAndDeviceBeanByWaferAndCpStep = getMesInfor.getCustomerAndDeviceByWaferAndCpStep(waferId, cpProcess);
                             if ((null != customerCodeAndDeviceBeanByWaferAndCpStep.getCustomerCode())) {
