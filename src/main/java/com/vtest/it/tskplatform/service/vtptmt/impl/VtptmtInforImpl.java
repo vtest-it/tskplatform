@@ -27,6 +27,14 @@ public class VtptmtInforImpl implements VtptmtInfor {
     @Override
     @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
     public int dataErrorsRecord(ArrayList<DataParseIssueBean> list) {
+        for (DataParseIssueBean bean : list) {
+            if (null == bean.getCustomCode()) {
+                bean.setCustomCode("NA");
+            }
+            if (null == bean.getDevice()) {
+                bean.setDevice("NA");
+            }
+        }
         return vtptmtDao.dataErrorsRecord(list);
     }
 

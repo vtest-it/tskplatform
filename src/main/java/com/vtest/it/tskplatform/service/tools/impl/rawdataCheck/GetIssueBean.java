@@ -44,7 +44,7 @@ public class GetIssueBean {
         HashMap<String, String> waferInfor = new HashMap<>();
         waferInfor.put("customCode", customerCodeAndDeviceBean.getCustomerCode());
         waferInfor.put("device", customerCodeAndDeviceBean.getDevice());
-        waferInfor.put("lot", customerCodeAndDeviceBean.getLot());
+        waferInfor.put("lot", lot);
         waferInfor.put("cpStep", cpProcess);
         waferInfor.put("waferNo", waferId);
         waferInfor.put("resource", "TSK");

@@ -12,7 +12,6 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -48,14 +47,8 @@ public class DataPerfect {
     }
 
     @AfterReturning(value = "perfectRawdataBeanMethod()&&args(rawdataInitBean,*)", returning = "checkFlag")
-    @Async
     public void adjacentDieCheck(RawdataInitBean rawdataInitBean, boolean checkFlag) {
         if (checkFlag) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             BinWaferInforBean binWaferInforBean = new BinWaferInforBean();
             generateVtptmtWaferInforBean.generate(rawdataInitBean, binWaferInforBean);
             adjacentFailDieCheck.deal(rawdataInitBean, binWaferInforBean);

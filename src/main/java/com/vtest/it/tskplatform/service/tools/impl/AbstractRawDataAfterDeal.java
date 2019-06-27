@@ -3,7 +3,10 @@ package com.vtest.it.tskplatform.service.tools.impl;
 import com.vtest.it.tskplatform.pojo.rawdataBean.RawdataInitBean;
 import com.vtest.it.tskplatform.service.tools.RawDataAfterDeal;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public abstract class AbstractRawDataAfterDeal implements RawDataAfterDeal {
     public void perfectDeal(RawdataInitBean bean) {
@@ -18,7 +21,6 @@ public abstract class AbstractRawDataAfterDeal implements RawDataAfterDeal {
         }
         HashMap<Integer, HashMap<Integer, Integer>> siteBinSum = new HashMap<>();
         HashMap<String, String> testDieMap = bean.getTestDieMap();
-        Set<String> dieSet = testDieMap.keySet();
         Collection<String> values = testDieMap.values();
         totalDieSum = values.size();
         for (String value : values) {
