@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +22,7 @@ import java.util.LinkedHashMap;
 
 @Aspect
 @Component
+@Order(0)
 public class DataPerfect {
     @Autowired
     private AdjacentFailDieCheck adjacentFailDieCheck;

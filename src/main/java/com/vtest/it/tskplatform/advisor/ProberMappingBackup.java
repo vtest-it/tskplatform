@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -23,7 +23,8 @@ import java.util.regex.Pattern;
 
 @Aspect
 @Component
-public class ProberMappingBackup implements Ordered {
+@Order(0)
+public class ProberMappingBackup {
     @Value("${system.properties.tsk.mapdown}")
     private String mapDownPath;
     @Value("${system.properties.tsk.backup-path}")
@@ -42,7 +43,7 @@ public class ProberMappingBackup implements Ordered {
         String regex = "[0-9]{1,}";
         String format = "yyyyMMddHHmmss";
         Pattern pattern = Pattern.compile(regex);
-        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList((ArrayList<File>) proceedingJoinPoint.getArgs()[0], 30);
+        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList((ArrayList<File>) proceedingJoinPoint.getArgs()[0], 60);
         ArrayList<File> fileNeedDealList = new ArrayList<>();
         for (File file : fileNeedCheckList) {
             if (file.isFile()) {
@@ -133,10 +134,5 @@ public class ProberMappingBackup implements Ordered {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public int getOrder() {
-        return 0;
     }
 }

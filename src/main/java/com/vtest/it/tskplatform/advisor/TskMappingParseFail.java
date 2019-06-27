@@ -10,28 +10,23 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 @Aspect
 @Component
-public class TskMappingParseFail implements Ordered {
+@Order(1)
+public class TskMappingParseFail {
     @Autowired
     private GetIssueBean getIssueBean;
     @Autowired
     private VtptmtInforImpl vtptmtInfor;
     @Autowired
     private AdjacentFailDieCheck adjacentFailDieCheck;
-    @Override
-    public int getOrder() {
-        return 0;
-    }
 
     @AfterThrowing(value = "execution(* generateRawdata(..)) && target(com.vtest.it.tskplatform.datadeal.GenerateRawdataInitInformation)&& args(wafer,slotAndSequenceConfigBean,waferId,lot)", throwing = "exception")
     private void mappingParseDealException(File wafer, SlotAndSequenceConfigBean slotAndSequenceConfigBean, String waferId, String lot, Exception exception) {
@@ -44,23 +39,9 @@ public class TskMappingParseFail implements Ordered {
             e.printStackTrace();
         }
     }
-
-    @AfterReturning(value = "execution(* generateRawdata(..)) && target(com.vtest.it.tskplatform.datadeal.GenerateRawdataInitInformation)", returning = "rawdataInitBean")
-    public void optimizeRawdataBeanWithBin0(RawdataInitBean rawdataInitBean) {
-        try {
-            HashMap<String, String> testDieMap = rawdataInitBean.getTestDieMap();
-            String osBin = rawdataInitBean.getProperties().get("OS Bins").split(",")[0];
-            for (Map.Entry<String, String> entry : testDieMap.entrySet()) {
-                if (entry.getValue().equals("   0   0   0")) {
-                    entry.setValue(String.format("%4s", osBin) + String.format("%4s", osBin) + String.format("%4s", "0"));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     @AfterReturning(value = "execution(* generateRawdata(..)) && target(com.vtest.it.tskplatform.datadeal.GenerateRawdataInitInformation)", returning = "rawdataInitBean")
     public void optimizeRawdataBean(RawdataInitBean rawdataInitBean) {
+        System.err.println("yes deal with perfect ...");
         adjacentFailDieCheck.perfectDeal(rawdataInitBean);
     }
 }
