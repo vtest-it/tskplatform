@@ -39,9 +39,9 @@ public class TskMappingParseFail {
             e.printStackTrace();
         }
     }
+
     @AfterReturning(value = "execution(* generateRawdata(..)) && target(com.vtest.it.tskplatform.datadeal.GenerateRawdataInitInformation)", returning = "rawdataInitBean")
     public void optimizeRawdataBean(RawdataInitBean rawdataInitBean) {
-        System.err.println("yes deal with perfect ...");
         adjacentFailDieCheck.perfectDeal(rawdataInitBean);
     }
 }

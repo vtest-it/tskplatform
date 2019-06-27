@@ -16,7 +16,6 @@ public class RawdataBeanDealWithBin0 {
     @AfterReturning(value = "execution(* generateRawdata(..)) && target(com.vtest.it.tskplatform.datadeal.GenerateRawdataInitInformation)", returning = "rawdataInitBean")
     public void optimizeRawdataBeanWithBin0(RawdataInitBean rawdataInitBean) {
         try {
-            System.err.println("yes deal with 0");
             HashMap<String, String> testDieMap = rawdataInitBean.getTestDieMap();
             String osBin = rawdataInitBean.getProperties().get("OS Bins").split(",")[0];
             for (Map.Entry<String, String> entry : testDieMap.entrySet()) {
