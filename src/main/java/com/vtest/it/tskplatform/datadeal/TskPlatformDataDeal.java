@@ -28,7 +28,7 @@ public class TskPlatformDataDeal {
         for (File lot : fileNeedDealListFinal) {
             try {
                 SlotAndSequenceConfigBean slotAndSequenceConfigBean = getMesInfor.getLotSlotConfig(lot.getName());
-                if (slotAndSequenceConfigBean.getReadType().equals("SLOT")) {
+                if (slotAndSequenceConfigBean.getReadType().toUpperCase().equals("SLOT")) {
                     File[] waferIds = lot.listFiles();
                     if (waferIds.length > 0) {
                         for (File wafer : waferIds) {

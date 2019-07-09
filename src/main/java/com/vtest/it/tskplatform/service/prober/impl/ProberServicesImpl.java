@@ -33,7 +33,7 @@ public class ProberServicesImpl implements ProberServices {
         return proberDao.insertWaferInforToBinWaferSummary(binWaferInforBean);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE, transactionManager = "proberTransactionManager")
     public void singleWaferDeal(BinWaferInforBean binWaferInforBean, String customerCode, String device, String lot, String cp, String waferId, HashMap<Integer, HashMap<Integer, Integer>> siteMap, String testType, ArrayList<Integer> passBins) {
         proberDao.deleteSiteInforToBinInfoSummary(customerCode, device, lot, cp, waferId);
         proberDao.insertSiteInforToBinInfoSummary(customerCode, device, lot, cp, waferId, siteMap, "P", passBins);
