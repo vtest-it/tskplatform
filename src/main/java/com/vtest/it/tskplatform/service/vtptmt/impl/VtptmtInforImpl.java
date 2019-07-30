@@ -25,7 +25,7 @@ public class VtptmtInforImpl implements VtptmtInfor {
     private VtptmtDao vtptmtDao;
 
     @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
+    @Transactional(transactionManager = "vtptmtTransactionManager", isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
     public int dataErrorsRecord(ArrayList<DataParseIssueBean> list) {
         for (DataParseIssueBean bean : list) {
             if (null == bean.getCustomCode()) {
@@ -63,13 +63,13 @@ public class VtptmtInforImpl implements VtptmtInfor {
     }
 
     @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
+    @Transactional(transactionManager = "vtptmtTransactionManager", isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
     public int insertWaferInforToBinWaferSummary(BinWaferInforBean binWaferInforBean) {
         return vtptmtDao.insertWaferInforToBinWaferSummary(binWaferInforBean);
     }
 
     @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
+    @Transactional(transactionManager = "vtptmtTransactionManager", isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
     public void waferFailTypeCheckOthers(String waferId, String cpProcess, String tester) {
         vtptmtDao.waferFailTypeCheckOthers(waferId, cpProcess, tester);
     }
@@ -86,7 +86,7 @@ public class VtptmtInforImpl implements VtptmtInfor {
         return vtptmtDao.updateProperties(mesProperties);
     }
 
-    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
+    @Transactional(transactionManager = "vtptmtTransactionManager", isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
     @Caching(evict = {
             @CacheEvict(cacheNames = {"SystemPropertiesCache"}, key = "'getTesterStatusSingle&'+#tester"),
             @CacheEvict(cacheNames = {"SystemPropertiesCache"}, key = "'getTesterStatus'")
