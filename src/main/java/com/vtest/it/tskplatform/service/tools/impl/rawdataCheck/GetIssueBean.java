@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 @Service
@@ -55,7 +57,7 @@ public class GetIssueBean {
             dataParseIssueBean.setIssueType("mes information");
         }
         dataParseIssueBean.setIssuePath(errorPath + "mappingParseError/" + lot + "/" + file.getName());
-        FileUtils.copyFile(file, new File(errorPath + "mappingParseError/" + lot + "/" + file.getName()));
+        FileUtils.copyFile(file, new File(errorPath + "mappingParseError/" + lot + "/" + file.getName() + "_" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())));
         try {
             FileUtils.forceDelete(file);
         } catch (IOException e) {

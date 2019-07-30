@@ -81,6 +81,8 @@ public class ProberMappingBackup {
                             CustomerCodeAndDeviceBean customerCodeAndDeviceBeanByWaferAndCpStep = getMesInfor.getCustomerAndDeviceByWaferAndCpStep(waferId, cpProcess);
                             if ((null != customerCodeAndDeviceBeanByWaferAndCpStep.getCustomerCode())) {
                                 FileUtils.copyFile(wafer, new File(backupPath + "/" + customerCode + "/" + customerCodeAndDeviceBeanByWaferAndCpStep.getDevice() + "/" + lot + "/" + cpProcess + "/" + wafer.getName() + "_" + new SimpleDateFormat(format).format(new Date())));
+                            } else {
+                                FileUtils.copyFile(wafer, new File(backupPath + "/" + customerCode + "/" + device + "/" + lot + "/" + cpProcess + "/" + wafer.getName() + "_" + new SimpleDateFormat(format).format(new Date())));
                             }
                         } catch (Exception e) {
                             FileUtils.copyFile(wafer, new File(backupPath + "/" + customerCode + "/" + device + "/" + lot + "/" + cpProcess + "/" + wafer.getName() + "_" + new SimpleDateFormat(format).format(new Date())));
