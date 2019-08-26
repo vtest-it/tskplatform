@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.vtest.it.tskplatform.dao.prober.ProberDao">
     <delete id="deleteSiteInforToBinInfoSummary">
-          DELETE FROM vtdaprober.bin_info_summary WHERE custom_code=#{customerCode} AND device=#{device} AND lot_id=#{lot} AND cp_step=#{cp} AND wafer_no =#{waferId};
+          DELETE FROM vtdaprober.bin_info_summary WHERE custom_code=#{customerCode} AND device=#{device} AND lot_id=#{lot} AND cp_step=#{cp} AND wafer_no =#{waferId} AND id >0;
     </delete>
     <insert id="insertSiteInforToBinInfoSummary">
         INSERT INTO vtdaprober.bin_info_summary(custom_code, device, lot_id, cp_step, wafer_no, site_id, soft_bin_no,

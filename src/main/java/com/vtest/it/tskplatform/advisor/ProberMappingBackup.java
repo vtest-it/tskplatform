@@ -8,6 +8,8 @@ import org.apache.commons.io.FileUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -38,6 +40,7 @@ public class ProberMappingBackup {
     @Autowired
     private TskProberMappingParseCpAndWaferId tskProberMappingParseCpAndWaferId;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProberMappingBackup.class);
     @Around("target(com.vtest.it.tskplatform.datadeal.TskPlatformDataDeal)&&execution(* deal(..))")
     public void backupProberMapping(ProceedingJoinPoint proceedingJoinPoint) {
         String regex = "[0-9]{1,}";
@@ -61,6 +64,9 @@ public class ProberMappingBackup {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                continue;
+            }
+            if (!getFileListNeedDeal.checkWafersAgain(file)) {
                 continue;
             }
             String lot = file.getName();
@@ -103,6 +109,7 @@ public class ProberMappingBackup {
                 try {
                     if (file.listFiles().length > 0) {
                         fileNeedDealList.add(file);
+                        LOGGER.error("backup path: " + mapDownPath + file.getName());
                         FileUtils.copyDirectory(file, new File(mapDownPath + "/" + file.getName()));
                     } else {
                         FileUtils.forceDelete(file);

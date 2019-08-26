@@ -81,6 +81,10 @@ spring:
         max-open-prepared-statements: 30
         time-between-eviction-runs-millis: 60000
         min-evictable-idle-time-millis: 30000
+  boot:
+    admin:
+      client:
+        url: http://192.168.10.153:10020
 server:
   port: 10010
 #信息

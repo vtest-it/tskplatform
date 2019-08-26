@@ -6,6 +6,8 @@ import com.vtest.it.tskplatform.pojo.vtptmt.DataParseIssueBean;
 import com.vtest.it.tskplatform.service.mes.impl.GetMesInforImpl;
 import com.vtest.it.tskplatform.service.tools.impl.rawdatatools.GenerateRawdataTemp;
 import com.vtest.it.tskplatform.service.vtptmt.impl.VtptmtInforImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class TskPlatformDataDeal {
     private GenerateRawdataInitInformation generateRawdataInitInformation;
     @Autowired
     private GenerateRawdataTemp generateRawdataTemp;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(TskPlatformDataDeal.class);
     public ArrayList<File> deal(ArrayList<File> fileNeedDealListFinal) {
         ArrayList<File> filesBeDealedList = new ArrayList<>();
         for (File lot : fileNeedDealListFinal) {
@@ -36,6 +38,8 @@ public class TskPlatformDataDeal {
                                 ArrayList<DataParseIssueBean> dataParseIssueBeans = new ArrayList<DataParseIssueBean>();
                                 Integer slot = Integer.valueOf(wafer.getName().substring(0, 3));
                                 String waferId = getMesInfor.getWaferIdBySlot(lot.getName(), "" + slot);
+                                LOGGER.error(lot.getName() + "& special file name:" + wafer.getName() + " & true waferId:" + waferId);
+                                LOGGER.error("wafer size:" + wafer.length() + " &  timeDiff:" + (System.currentTimeMillis() - wafer.lastModified()) / 1000);
                                 generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lot.getName(), dataParseIssueBeans, filesBeDealedList);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -49,6 +53,8 @@ public class TskPlatformDataDeal {
                             try {
                                 ArrayList<DataParseIssueBean> dataParseIssueBeans = new ArrayList<>();
                                 String waferId = wafer.getName().substring(4);
+                                LOGGER.error(lot.getName() + "& special file name: " + wafer.getName() + " & true waferId: " + waferId);
+                                LOGGER.error("wafer size:" + wafer.length() + " & timeDiff: " + (System.currentTimeMillis() - wafer.lastModified()) / 1000);
                                 generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lot.getName(), dataParseIssueBeans, filesBeDealedList);
                             } catch (Exception e) {
                                 e.printStackTrace();
