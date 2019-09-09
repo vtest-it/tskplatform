@@ -97,7 +97,7 @@ public class ProberMappingBackup {
                             FileUtils.copyFile(wafer, new File(errorPath + "/waferCheckError/" + lot + "/" + wafer.getName()));
                             FileUtils.forceDelete(wafer);
                         }
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         try {
                             FileUtils.copyFile(wafer, new File(errorPath + "/waferCheckError/" + lot + "/" + wafer.getName()));
                             FileUtils.forceDelete(wafer);
