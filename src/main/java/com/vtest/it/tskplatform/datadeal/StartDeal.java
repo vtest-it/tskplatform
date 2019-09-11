@@ -25,6 +25,6 @@ public class StartDeal {
         for (File lot : dataSource.listFiles()) {
             fileNeedDealList.add(lot);
         }
-        tskPlatformDataDeal.deal(fileNeedDealList);
+        tskPlatformDataDeal.deal(fileNeedDealList, null);
     }
 }

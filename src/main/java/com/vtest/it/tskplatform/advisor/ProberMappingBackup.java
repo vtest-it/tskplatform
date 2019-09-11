@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,7 +48,8 @@ public class ProberMappingBackup {
         String format = "yyyyMMddHHmmss";
         Pattern pattern = Pattern.compile(regex);
         ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList((ArrayList<File>) proceedingJoinPoint.getArgs()[0], 60);
-        ArrayList<File> fileNeedDealList = new ArrayList<>();
+        ArrayList<File> fileNeedDealListWafer = new ArrayList<>();
+        HashMap<File, String> waferLotMap = new HashMap<>();
         for (File file : fileNeedCheckList) {
             if (file.isFile()) {
                 try {
@@ -73,6 +75,9 @@ public class ProberMappingBackup {
             CustomerCodeAndDeviceBean customerCodeAndDeviceBean = getMesInfor.getCustomerAndDeviceByLot(lot);
             if (null != customerCodeAndDeviceBean.getCustomerCode()) {
                 for (File wafer : file.listFiles()) {
+                    if (!getFileListNeedDeal.checkWafersSingle(wafer)) {
+                        continue;
+                    }
                     try {
                         String waferIdSurface = wafer.getName().substring(4);
                         String result = tskProberMappingParseCpAndWaferId.parse(wafer);
@@ -96,9 +101,15 @@ public class ProberMappingBackup {
                         if ((!waferIdSurface.trim().equals(waferFromFile.trim())) || !matcher.find()) {
                             FileUtils.copyFile(wafer, new File(errorPath + "/waferCheckError/" + lot + "/" + wafer.getName()));
                             FileUtils.forceDelete(wafer);
+                        } else {
+                            FileUtils.copyFile(wafer, new File(mapDownPath + "/" + lot + "/" + wafer.getName()));
+                            fileNeedDealListWafer.add(wafer);
+                            waferLotMap.put(wafer, lot);
                         }
                     } catch (Exception e) {
                         try {
+                            LOGGER.error(wafer.getName());
+                            LOGGER.error(e.getMessage());
                             FileUtils.copyFile(wafer, new File(errorPath + "/waferCheckError/" + lot + "/" + wafer.getName()));
                             FileUtils.forceDelete(wafer);
                         } catch (IOException e1) {
@@ -107,11 +118,7 @@ public class ProberMappingBackup {
                     }
                 }
                 try {
-                    if (file.listFiles().length > 0) {
-                        fileNeedDealList.add(file);
-                        LOGGER.error("backup path: " + mapDownPath + file.getName());
-                        FileUtils.copyDirectory(file, new File(mapDownPath + "/" + file.getName()));
-                    } else {
+                    if (file.listFiles().length == 0) {
                         FileUtils.forceDelete(file);
                     }
                 } catch (IOException e) {
@@ -128,7 +135,7 @@ public class ProberMappingBackup {
             }
         }
         try {
-            ArrayList<File> fileBeDealList = (ArrayList<File>) proceedingJoinPoint.proceed(new Object[]{fileNeedDealList});
+            ArrayList<File> fileBeDealList = (ArrayList<File>) proceedingJoinPoint.proceed(new Object[]{fileNeedDealListWafer, waferLotMap});
             backupProberMappingAfterDeal(fileBeDealList);
         } catch (Throwable throwable) {
             throwable.printStackTrace();

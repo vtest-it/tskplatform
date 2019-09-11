@@ -36,4 +36,13 @@ public class GetFileListNeedDeal {
         LOGGER.error(lot + " result: " + true);
         return true;
     }
+
+    public boolean checkWafersSingle(File wafer) {
+        long now = System.currentTimeMillis();
+        LOGGER.error(" time now: " + simpleDateFormat.format(now));
+        LOGGER.error(wafer.getName() + " last modify time: " + simpleDateFormat.format(wafer.lastModified()));
+        boolean flag = ((now - wafer.lastModified()) / 1000 > 60);
+        LOGGER.error(wafer.getName() + " result: " + flag);
+        return flag;
+    }
 }
