@@ -37,14 +37,22 @@ public class TskPlatformDataDeal {
                     ArrayList<DataParseIssueBean> dataParseIssueBeans = new ArrayList<DataParseIssueBean>();
                     Integer slot = Integer.valueOf(wafer.getName().substring(0, 3));
                     String waferId = getMesInfor.getWaferIdBySlot(lotName, "" + slot);
+                    long timeDiff = (System.currentTimeMillis() - wafer.lastModified()) / 1000;
+                    if (timeDiff < 60) {
+                        continue;
+                    }
                     LOGGER.error(lotName + "& special file name:" + wafer.getName() + " & true waferId:" + waferId);
-                    LOGGER.error("wafer size:" + wafer.length() + " &  timeDiff:" + (System.currentTimeMillis() - wafer.lastModified()) / 1000);
+                    LOGGER.error("wafer size:" + wafer.length() + " &  timeDiff:" + timeDiff);
                     generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lotName, dataParseIssueBeans, filesBeDealedList);
                 } else {
                     ArrayList<DataParseIssueBean> dataParseIssueBeans = new ArrayList<>();
                     String waferId = wafer.getName().substring(4);
+                    long timeDiff = (System.currentTimeMillis() - wafer.lastModified()) / 1000;
+                    if (timeDiff < 60) {
+                        continue;
+                    }
                     LOGGER.error(lotName + "& special file name: " + wafer.getName() + " & true waferId: " + waferId);
-                    LOGGER.error("wafer size:" + wafer.length() + " & timeDiff: " + (System.currentTimeMillis() - wafer.lastModified()) / 1000);
+                    LOGGER.error("wafer size:" + wafer.length() + " & timeDiff: " + timeDiff);
                     generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lotName, dataParseIssueBeans, filesBeDealedList);
                 }
             } catch (Exception e) {
