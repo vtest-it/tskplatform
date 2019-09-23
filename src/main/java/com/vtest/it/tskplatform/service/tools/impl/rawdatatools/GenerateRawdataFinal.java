@@ -34,7 +34,12 @@ public class GenerateRawdataFinal {
                 FileUtils.forceDelete(file);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            generateFinalRawdata(file, rawdataInitBean);
         }
     }
 }
