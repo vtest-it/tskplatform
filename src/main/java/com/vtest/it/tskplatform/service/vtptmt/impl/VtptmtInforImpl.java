@@ -93,6 +93,6 @@ public class VtptmtInforImpl implements VtptmtInfor {
     })
     public void singleWaferDeal(BinWaferInforBean binWaferInforBean, String waferId, String cpProcess, String tester) {
         vtptmtDao.insertWaferInforToBinWaferSummary(binWaferInforBean);
-        vtptmtDao.waferFailTypeCheckOthers(waferId, cpProcess, tester);
+//        vtptmtDao.waferFailTypeCheckOthers(waferId, cpProcess, tester);
     }
 }

@@ -4,6 +4,7 @@ import com.vtest.it.tskplatform.MappingParseTools.TskProberMappingParseCpAndWafe
 import com.vtest.it.tskplatform.pojo.mes.CustomerCodeAndDeviceBean;
 import com.vtest.it.tskplatform.service.mes.GetMesInfor;
 import com.vtest.it.tskplatform.service.tools.impl.GetFileListNeedDeal;
+import com.vtest.it.tskplatform.service.tools.impl.mappingEndCodeCheck.EndCodeCheck;
 import org.apache.commons.io.FileUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -40,8 +41,11 @@ public class ProberMappingBackup {
     private GetFileListNeedDeal getFileListNeedDeal;
     @Autowired
     private TskProberMappingParseCpAndWaferId tskProberMappingParseCpAndWaferId;
+    @Autowired
+    private EndCodeCheck endCodeCheck;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProberMappingBackup.class);
+
     @Around("target(com.vtest.it.tskplatform.datadeal.TskPlatformDataDeal)&&execution(* deal(..))")
     public void backupProberMapping(ProceedingJoinPoint proceedingJoinPoint) {
         String regex = "[0-9]{1,}";
@@ -78,6 +82,10 @@ public class ProberMappingBackup {
                     if (!getFileListNeedDeal.checkWafersSingle(wafer)) {
                         continue;
                     }
+                    if (!endCodeCheck.check(wafer)) {
+                        continue;
+                    }
+                    LOGGER.error(wafer.getName() + " : end code check right with 00");
                     try {
                         String waferIdSurface = wafer.getName().substring(4);
                         String result = tskProberMappingParseCpAndWaferId.parse(wafer);

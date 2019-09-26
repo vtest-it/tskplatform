@@ -4,6 +4,7 @@ import com.vtest.it.tskplatform.pojo.mes.SlotAndSequenceConfigBean;
 import com.vtest.it.tskplatform.pojo.rawdataBean.RawdataInitBean;
 import com.vtest.it.tskplatform.pojo.vtptmt.DataParseIssueBean;
 import com.vtest.it.tskplatform.service.mes.impl.GetMesInforImpl;
+import com.vtest.it.tskplatform.service.tools.impl.mappingEndCodeCheck.EndCodeCheck;
 import com.vtest.it.tskplatform.service.tools.impl.rawdatatools.GenerateRawdataTemp;
 import com.vtest.it.tskplatform.service.vtptmt.impl.VtptmtInforImpl;
 import org.slf4j.Logger;
@@ -25,6 +26,8 @@ public class TskPlatformDataDeal {
     private GenerateRawdataInitInformation generateRawdataInitInformation;
     @Autowired
     private GenerateRawdataTemp generateRawdataTemp;
+    @Autowired
+    private EndCodeCheck endCodeCheck;
     private static final Logger LOGGER = LoggerFactory.getLogger(TskPlatformDataDeal.class);
 
     public ArrayList<File> deal(ArrayList<File> fileNeedDealListFinal, HashMap<File, String> waferLotMap) {
@@ -37,22 +40,22 @@ public class TskPlatformDataDeal {
                     ArrayList<DataParseIssueBean> dataParseIssueBeans = new ArrayList<DataParseIssueBean>();
                     Integer slot = Integer.valueOf(wafer.getName().substring(0, 3));
                     String waferId = getMesInfor.getWaferIdBySlot(lotName, "" + slot);
-                    long timeDiff = (System.currentTimeMillis() - wafer.lastModified()) / 1000;
-                    if (timeDiff < 60) {
+                    if (!lastCheck(wafer)) {
                         continue;
                     }
+                    LOGGER.error(wafer.getName() + " : end code check right with 00");
                     LOGGER.error(lotName + "& special file name:" + wafer.getName() + " & true waferId:" + waferId);
-                    LOGGER.error("wafer size:" + wafer.length() + " &  timeDiff:" + timeDiff);
+                    LOGGER.error("wafer size:" + wafer.length() + " &  timeDiff:" + (System.currentTimeMillis() - wafer.lastModified()) / 1000);
                     generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lotName, dataParseIssueBeans, filesBeDealedList);
                 } else {
                     ArrayList<DataParseIssueBean> dataParseIssueBeans = new ArrayList<>();
                     String waferId = wafer.getName().substring(4);
-                    long timeDiff = (System.currentTimeMillis() - wafer.lastModified()) / 1000;
-                    if (timeDiff < 60) {
+                    if (!lastCheck(wafer)) {
                         continue;
                     }
+                    LOGGER.error(wafer.getName() + " : end code check right with 00");
                     LOGGER.error(lotName + "& special file name: " + wafer.getName() + " & true waferId: " + waferId);
-                    LOGGER.error("wafer size:" + wafer.length() + " & timeDiff: " + timeDiff);
+                    LOGGER.error("wafer size:" + wafer.length() + " & timeDiff: " + (System.currentTimeMillis() - wafer.lastModified()) / 1000);
                     generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lotName, dataParseIssueBeans, filesBeDealedList);
                 }
             } catch (Exception e) {
@@ -62,6 +65,13 @@ public class TskPlatformDataDeal {
         return filesBeDealedList;
     }
 
+    public boolean lastCheck(File wafer) {
+        long timeDiff = (System.currentTimeMillis() - wafer.lastModified()) / 1000;
+        if (timeDiff > 60 && endCodeCheck.check(wafer)) {
+            return true;
+        }
+        return false;
+    }
     public void generateRawdata(File wafer, SlotAndSequenceConfigBean slotAndSequenceConfigBean, String waferId, String lot, ArrayList<DataParseIssueBean> dataParseIssueBeans, ArrayList<File> filesBeDealedList) throws Exception {
         RawdataInitBean rawdataInitBean = generateRawdataInitInformation.generateRawdata(wafer, slotAndSequenceConfigBean, waferId, lot);
         boolean checkFlag = generateRawdataTemp.generateTempRawdata(rawdataInitBean, dataParseIssueBeans);
