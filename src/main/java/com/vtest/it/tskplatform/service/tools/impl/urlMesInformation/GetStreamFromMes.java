@@ -20,38 +20,38 @@ public class GetStreamFromMes {
     private VtptmtInforImpl vtptmtInfor;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GetStreamFromMes.class);
+
     public BufferedReader getStream(String URL) throws IOException {
-        MesProperties properties = vtptmtInfor.getProperties();
-        URL url = new URL(properties.getInitUrl() + URL);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setRequestMethod("GET");
-        urlConnection.setRequestProperty("HOST", properties.getHost());
-        urlConnection.setReadTimeout(10000);
-        urlConnection.setConnectTimeout(10000);
-        initUrlConnecttion(urlConnection, 0);
-        InputStream inputStream = urlConnection.getInputStream();
-        InputStreamReader IsReader = new InputStreamReader(inputStream, "utf8");
-        BufferedReader bufferedReader = new BufferedReader(IsReader);
-        return bufferedReader;
+        return getStream(URL, 0);
     }
 
-    private void initUrlConnecttion(HttpURLConnection urlConnection, int times) {
-        LOGGER.error("mes data upload by url time:" + times + " & info:" + urlConnection.toString());
+    public BufferedReader getStream(String URL, int times) throws IOException {
         try {
+            MesProperties properties = vtptmtInfor.getProperties();
+            URL url = new URL(properties.getInitUrl() + URL);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestProperty("HOST", properties.getHost());
+            urlConnection.setReadTimeout(10000);
+            urlConnection.setConnectTimeout(10000);
             urlConnection.connect();
+            InputStream inputStream = urlConnection.getInputStream();
+            InputStreamReader IsReader = new InputStreamReader(inputStream, "utf8");
+            BufferedReader bufferedReader = new BufferedReader(IsReader);
+            return bufferedReader;
         } catch (Exception e) {
-            // TODO: handle exception
-            LOGGER.error("error reasons: " + e.getMessage());
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            times++;
             if (times < 5) {
-                initUrlConnecttion(urlConnection, times);
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                LOGGER.error("total mes data upload by url time:" + times + " & info:" + URL);
+                LOGGER.error("error reasons: " + e.getMessage());
+                getStream(URL, times++);
             }
         }
+        return null;
     }
 }
