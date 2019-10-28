@@ -77,9 +77,10 @@ public class FailTypeCheck {
             boolean flag = true;
             Integer xCoordnate = Integer.valueOf(coordinate.split(":")[0]);
             Integer yCoordnate = Integer.valueOf(coordinate.split(":")[1]);
-            for (int i = 1; i < 7; i++) {
+            for (int i = 1; i < 100; i++) {
                 if (!set.contains((xCoordnate + i) + ":" + yCoordnate)) {
                     flag = false;
+                    break;
                 }
             }
             checkFlagSet.add(flag);
@@ -96,9 +97,10 @@ public class FailTypeCheck {
             boolean flag = true;
             Integer xCoordnate = Integer.valueOf(coordinate.split(":")[0]);
             Integer yCoordnate = Integer.valueOf(coordinate.split(":")[1]);
-            for (int i = 1; i < 7; i++) {
+            for (int i = 1; i < 100; i++) {
                 if (!set.contains(xCoordnate + ":" + (yCoordnate + i))) {
                     flag = false;
+                    break;
                 }
             }
             checkFlagSet.add(flag);

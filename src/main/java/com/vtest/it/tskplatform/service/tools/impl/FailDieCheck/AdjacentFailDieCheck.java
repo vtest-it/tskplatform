@@ -47,7 +47,7 @@ public class AdjacentFailDieCheck extends AbstractRawDataAfterDeal {
                     break;
                 }
                 if (node.size() >= 5) {
-                    if (node.size() >= 10) {
+                    if (node.size() >= 5000) {
                         checkResult.put("10 interflow Fail", true);
                     }
                     if ((checkResult.containsKey("8 Neighborhood Fail") && !checkResult.get("8 Neighborhood Fail")) || !checkResult.containsKey("8 Neighborhood Fail")) {
