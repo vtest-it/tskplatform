@@ -18,9 +18,19 @@ public class RawdataBeanDealWithBin0 {
         try {
             HashMap<String, String> testDieMap = rawdataInitBean.getTestDieMap();
             String osBin = rawdataInitBean.getProperties().get("OS Bins").split(",")[0];
+            String passBin = rawdataInitBean.getProperties().get("Pass Bins").split(",")[0];
+            String customerCode = rawdataInitBean.getProperties().get("Customer Code");
             for (Map.Entry<String, String> entry : testDieMap.entrySet()) {
                 if (entry.getValue().equals("   0   0   0")) {
                     entry.setValue(String.format("%4s", osBin) + String.format("%4s", osBin) + String.format("%4s", "0"));
+                    continue;
+                }
+                if (entry.getValue().equals("   0   0 999")) {
+                    if (customerCode.equals("QRC")) {
+                        entry.setValue(String.format("%4s", passBin) + String.format("%4s", passBin) + String.format("%4s", "0"));
+                    } else {
+                        entry.setValue(String.format("%4s", osBin) + String.format("%4s", osBin) + String.format("%4s", "0"));
+                    }
                 }
             }
         } catch (Exception e) {

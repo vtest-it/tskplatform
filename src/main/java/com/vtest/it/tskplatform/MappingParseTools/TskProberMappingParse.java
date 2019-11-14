@@ -264,7 +264,11 @@ public class TskProberMappingParse {
 						{
 							Bin_summary_Map.put(measureFlag, Bin_summary_Map.get(measureFlag)+1);
 						}
-						testDieMap.put(key, String.format("%4s", measureFlag)+String.format("%4s", measureFlag)+String.format("%4s", "0"));
+                        if (dieTestResult == 1 && measureFlag == 0) {
+                            testDieMap.put(key, String.format("%4s", measureFlag) + String.format("%4s", measureFlag) + String.format("%4s", "999"));
+                        } else {
+                            testDieMap.put(key, String.format("%4s", measureFlag) + String.format("%4s", measureFlag) + String.format("%4s", "0"));
+                        }
 						if (dieTestResult==1) {
 							PassDie++;
 						}
