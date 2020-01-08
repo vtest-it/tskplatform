@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,7 +52,9 @@ public class ProberMappingBackup {
         String regex = "[0-9]{1,}";
         String format = "yyyyMMddHHmmss";
         Pattern pattern = Pattern.compile(regex);
-        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList((ArrayList<File>) proceedingJoinPoint.getArgs()[0], 60);
+        ArrayList<File> list = (ArrayList<File>) proceedingJoinPoint.getArgs()[0];
+        deleteDownFileImmediately(list);
+        ArrayList<File> fileNeedCheckList = getFileListNeedDeal.getList(list, 60);
         ArrayList<File> fileNeedDealListWafer = new ArrayList<>();
         HashMap<File, String> waferLotMap = new HashMap<>();
         for (File file : fileNeedCheckList) {
@@ -157,6 +160,33 @@ public class ProberMappingBackup {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void deleteDownFileImmediately(List<File> files) {
+        try {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    File[] mappings = file.listFiles();
+                    String lot = file.getName();
+                    if (mappings.length > 0) {
+                        for (File mapping : mappings) {
+                            if (mapping.isFile()) {
+                                File mapDownFile = new File(mapDownPath + "/" + lot + "/" + mapping.getName());
+                                if (mapDownFile.exists()) {
+                                    try {
+                                        FileUtils.forceDelete(mapDownFile);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
