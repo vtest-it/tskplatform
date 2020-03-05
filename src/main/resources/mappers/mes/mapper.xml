@@ -21,4 +21,7 @@
     <select id="getCustomerAndDeviceByWaferAndCpStep" statementType="CALLABLE" resultMap="customerAndDevice">
         {call WebMES.dbo.pro_GetCustDeviceInfo(#{waferId,mode=IN,jdbcType=VARCHAR},#{cpStep,mode=IN,jdbcType=VARCHAR})}
     </select>
+    <select id="getWaferIdCurrentCpStep" statementType="CALLABLE" resultType="string">
+        {call WebMES.dbo.pro_GetCurrstep(#{waferId,mode=IN,jdbcType=VARCHAR})}
+    </select>
 </mapper>

@@ -97,9 +97,10 @@ public class ProberMappingBackup {
                         Matcher matcher = pattern.matcher(cpProcess.substring(2));
                         String customerCode = customerCodeAndDeviceBean.getCustomerCode();
                         String device = customerCodeAndDeviceBean.getDevice();
+                        String waferId = null;
                         try {
                             Integer slot = Integer.valueOf(wafer.getName().substring(0, 3));
-                            String waferId = getMesInfor.getWaferIdBySlot(lot, "" + slot);
+                            waferId = getMesInfor.getWaferIdBySlot(lot, "" + slot);
                             CustomerCodeAndDeviceBean customerCodeAndDeviceBeanByWaferAndCpStep = getMesInfor.getCustomerAndDeviceByWaferAndCpStep(waferId, cpProcess);
                             if ((null != customerCodeAndDeviceBeanByWaferAndCpStep.getCustomerCode())) {
                                 FileUtils.copyFile(wafer, new File(backupPath + "/" + customerCode + "/" + customerCodeAndDeviceBeanByWaferAndCpStep.getDevice() + "/" + lot + "/" + cpProcess + "/" + wafer.getName() + "_" + new SimpleDateFormat(format).format(new Date())));
@@ -113,7 +114,12 @@ public class ProberMappingBackup {
                             FileUtils.copyFile(wafer, new File(errorPath + "/waferCheckError/" + lot + "/" + wafer.getName()));
                             FileUtils.forceDelete(wafer);
                         } else {
-                            FileUtils.copyFile(wafer, new File(mapDownPath + "/" + lot + "/" + wafer.getName()));
+                            String mesCpStep = getMesInfor.getWaferIdCurrentCpStep(waferId);
+                            if (mesCpStep.equals(cpProcess)) {
+                                FileUtils.copyFile(wafer, new File(mapDownPath + "/" + lot + "/" + wafer.getName()));
+                            } else {
+                                LOGGER.error(wafer.getName() + ": file inner cp process is match current mes cp process");
+                            }
                             fileNeedDealListWafer.add(wafer);
                             waferLotMap.put(wafer, lot);
                         }

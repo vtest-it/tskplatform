@@ -55,4 +55,10 @@ public class GetMesInforImpl implements GetMesInfor {
         CustomerCodeAndDeviceBean customerCodeAndDeviceBean = mesDao.getCustomerAndDeviceByWaferAndCpStep(waferId, cpStep);
         return null == customerCodeAndDeviceBean ? new CustomerCodeAndDeviceBean() : customerCodeAndDeviceBean;
     }
+
+    @Override
+    public String getWaferIdCurrentCpStep(String waferId) {
+        String currentCpStep = mesDao.getWaferIdCurrentCpStep(waferId);
+        return null == currentCpStep ? "NA" : currentCpStep;
+    }
 }
