@@ -2,6 +2,10 @@ package com.vtest.it.tskplatform.service.tools.impl;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * @author shawn.sun
+ * @date 2020/06/10 12:53:23
+ */
 @Service
 public class GetRandomNumber {
 	public String getRandomNumber(int length) {

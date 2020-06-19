@@ -18,10 +18,21 @@ public class EndCodeCheck {
             byte[] bs = new byte[(int) mapping.length()];
             fileInputStream.read(bs);
             fileInputStream.close();
+
+            boolean flag = true;
             for (int i = bs.length - 1; i > bs.length - 8; i--) {
                 if (bs[i] != 0) {
                     LOGGER.error(mapping.getName() + " & end code check result: " + false);
-                    return false;
+                    flag = false;
+                    break;
+                }
+            }
+            if (!flag) {
+                for (int i = bs.length - 1; i > bs.length - 33; i--) {
+                    if (bs[i] != 32) {
+                        LOGGER.error(mapping.getName() + " & end code check result: " + false);
+                        return false;
+                    }
                 }
             }
             LOGGER.error(mapping.getName() + " & end code check result: " + true);

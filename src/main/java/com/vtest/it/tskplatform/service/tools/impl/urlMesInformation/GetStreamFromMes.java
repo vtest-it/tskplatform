@@ -28,6 +28,7 @@ public class GetStreamFromMes {
     public BufferedReader getStream(String URL, int times) throws IOException {
         try {
             MesProperties properties = vtptmtInfor.getProperties();
+            URL = URL.replaceAll("#", "%23");
             URL url = new URL(properties.getInitUrl() + URL);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
