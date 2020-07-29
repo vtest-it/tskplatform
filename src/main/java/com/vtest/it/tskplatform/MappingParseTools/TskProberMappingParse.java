@@ -226,7 +226,7 @@ public class TskProberMappingParse {
 			if (dieExcept!=1){
 				String key=String.format("%4s", CellX)+String.format("%4s", CellY);
 				if (!testDieMap.containsKey(key)&&!skipAndMarkDieMap.containsKey(key)) {
-					if (Die_property==0)
+					if (Die_property == 0 || Die_property == 3)
 					{
 						skipAndMarkDieMap.put(key, String.format("%4s", "S")+String.format("%4s", "S")+String.format("%4s", "0"));
 					}

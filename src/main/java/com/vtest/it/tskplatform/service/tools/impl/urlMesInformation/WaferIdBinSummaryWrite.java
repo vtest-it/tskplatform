@@ -36,18 +36,18 @@ public class WaferIdBinSummaryWrite {
                 }
             }
         }
-        StringBuffer SB = new StringBuffer();
+        StringBuffer sb = new StringBuffer();
         Set<Integer> set = binSummary.keySet();
         for (Integer bin : set) {
-            SB.append("|Bin" + bin + ":" + binSummary.get(bin));
+            sb.append("|Bin").append(bin).append(":").append(binSummary.get(bin));
         }
         String startTime = rawdataInitBean.getProperties().get("Test Start Time");
         String endTime = rawdataInitBean.getProperties().get("Test End Time");
         startTime = startTime.length() > 14 ? startTime.substring(0, 14) : startTime;
         endTime = endTime.length() > 14 ? endTime.substring(0, 14) : endTime;
-        SB.append("|TestStart:" + startTime);
-        SB.append("|TestEnd:" + endTime);
-        String summary = SB.toString();
+        sb.append("|TestStart:").append(startTime);
+        sb.append("|TestEnd:").append(endTime);
+        String summary = sb.toString();
         waferidInforIntoMes.write(lot, waferId, cp, summary);
     }
 }
